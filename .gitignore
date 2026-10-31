@@ -31,3 +31,8 @@ bin/
 
 .idea/
 *.iml
+
+# draw.io auto-save and backup files
+.*.drawio.bkp
+.*.bkp
+~$*
