@@ -36,3 +36,6 @@ bin/
 .*.drawio.bkp
 .*.bkp
 ~$*
+# Beneficiary prototype data (may contain personal information)
+data/
+*.dat
