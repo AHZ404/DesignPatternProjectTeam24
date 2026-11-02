@@ -1,290 +1,276 @@
 package beneficiary.service;
 
 import beneficiary.model.*;
-import beneficiary.repository.BeneficiaryRepository;
-import beneficiary.repository.BeneficiaryRepository.Data;
-import java.nio.file.Path;
+import database.JsonRepository;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/** Business logic for the agreed BEN-01 through BEN-10 requirements. */
 public final class BeneficiaryService {
-    private final BeneficiaryRepository repository;
-    private final InventoryManager inventory=InventoryManager.getInstance();
-    public BeneficiaryService(Path path) { this(new BeneficiaryRepository(path)); }
-    public BeneficiaryService(BeneficiaryRepository repository) { this.repository=Objects.requireNonNull(repository); }
+    private final JsonRepository repository;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private static String required(String s, String field) {
-        if (s==null || s.trim().isEmpty()) throw new IllegalArgumentException(field + " cannot be empty");
-        return s.trim();
-    }
-    private static String optional(String s) { return s==null ? "" : s.trim(); }
-    private static String time() { return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")); }
-    private static int id(Data d) { return d.nextId++; }
-    private static Beneficiary beneficiary(Data d,int id) {
-        Beneficiary b=d.beneficiaries.get(id);
-        if (b==null) throw new IllegalArgumentException("Beneficiary #" + id + " does not exist");
-        return b;
-    }
-    private static Resource resource(Data d,int id) {
-        Resource r=d.resources.get(id);
-        if (r==null) throw new IllegalArgumentException("Resource #" + id + " does not exist");
-        return r;
-    }
-    private static AssistanceRequest request(Data d,int id) {
-        AssistanceRequest r=d.requests.get(id);
-        if (r==null) throw new IllegalArgumentException("Request #" + id + " does not exist");
-        return r;
+    public BeneficiaryService(JsonRepository repository) {
+        this.repository = Objects.requireNonNull(repository);
     }
 
-    // BEN-01, BEN-02, BEN-10
-    public Beneficiary register(String name,String contact,String address) {
-        final String n=required(name,"Name"), c=required(contact,"Contact");
-        return repository.change(d -> {
-            Beneficiary b=new Beneficiary(id(d),n,c,optional(address),Beneficiary.Status.PENDING);
-            d.beneficiaries.put(b.getId(),b); return b;
+    private static String now() {
+        return LocalDateTime.now().format(FORMATTER);
+    }
+
+    // --- BENEFICIARY CRUD ---
+    public Beneficiary register(String name, String contact, String address) {
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Name required");
+        return repository.update(db -> {
+            Beneficiary b = new Beneficiary(db.nextUserId++, name.trim(), contact.trim(), address.trim(), Beneficiary.Status.PENDING);
+            db.beneficiaries.put(b.getId(), b);
+            return b;
         });
     }
-    public Beneficiary update(int beneficiaryId,String name,String contact,String address) {
-        final String n=required(name,"Name"), c=required(contact,"Contact");
-        return repository.change(d -> {
-            Beneficiary b=beneficiary(d,beneficiaryId);
-            Beneficiary updated=new Beneficiary(b.getId(),n,c,optional(address),b.getStatus());
-            d.beneficiaries.put(b.getId(),updated); return updated;
-        });
-    }
-    public Beneficiary setNeedStatus(int beneficiaryId,Beneficiary.Status status) {
-        Objects.requireNonNull(status,"status");
-        return repository.change(d -> {
-            Beneficiary b=beneficiary(d,beneficiaryId);
-            Beneficiary updated=new Beneficiary(b.getId(),b.getName(),b.getContact(),b.getAddress(),status);
-            d.beneficiaries.put(b.getId(),updated); return updated;
-        });
-    }
-    /** BEN-02 delete: only beneficiaries with no assistance history, so aid records are never orphaned. */
-    public Beneficiary deleteBeneficiary(int beneficiaryId) {
-        return repository.change(d -> {
-            Beneficiary b=beneficiary(d,beneficiaryId);
-            boolean linked=d.needs.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
-                    || d.requests.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
-                    || d.distributions.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
-                    || d.services.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
-                    || d.impacts.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId);
-            if (linked) throw new IllegalArgumentException("Beneficiary #" + beneficiaryId
-                    + " has assistance history and cannot be deleted. Change their status instead.");
-            d.beneficiaries.remove(beneficiaryId); return b;
-        });
-    }
-    public List<Beneficiary> beneficiaries() {
-        return repository.read(d -> new ArrayList<>(d.beneficiaries.values()));
-    }
-    public List<Beneficiary> search(String query) {
-        final String q=optional(query).toLowerCase(Locale.ROOT);
-        return repository.read(d -> {
-            // Prefer an exact numeric ID when it exists, instead of matching phone fragments.
-            if (q.matches("[0-9]+")) {
-                try {
-                    Beneficiary exact=d.beneficiaries.get(Integer.parseInt(q));
-                    if (exact!=null) return Collections.singletonList(exact);
-                } catch (NumberFormatException ignored) { }
+
+    public List<Beneficiary> listBeneficiaries(String query) {
+        return repository.read(db -> {
+            if (query == null || query.isBlank()) return new ArrayList<>(db.beneficiaries.values());
+            String q = query.trim().toLowerCase();
+            List<Beneficiary> result = new ArrayList<>();
+            for (Beneficiary b : db.beneficiaries.values()) {
+                if (String.valueOf(b.getId()).contains(q) ||
+                        b.getName().toLowerCase().contains(q) ||
+                        b.getContact().toLowerCase().contains(q)) {
+                    result.add(b);
+                }
             }
-            List<Beneficiary> matches=new ArrayList<>();
-            for (Beneficiary b:d.beneficiaries.values()) {
-                if (b.getName().toLowerCase(Locale.ROOT).contains(q)
-                        || b.getContact().toLowerCase(Locale.ROOT).contains(q)
-                        || String.valueOf(b.getId()).equals(q)) matches.add(b);
+            return result;
+        });
+    }
+
+    public void update(int id, String name, String contact, String address) {
+        repository.update(db -> {
+            Beneficiary existing = db.beneficiaries.get(id);
+            if (existing == null) throw new IllegalArgumentException("Beneficiary not found ID: " + id);
+            Beneficiary updated = new Beneficiary(id, name, contact, address, existing.getStatus());
+            db.beneficiaries.put(id, updated);
+            return null;
+        });
+    }
+
+    public void deleteBeneficiary(int id) {
+        repository.update(db -> {
+            if (!db.beneficiaries.containsKey(id)) throw new IllegalArgumentException("Beneficiary not found ID: " + id);
+            db.beneficiaries.remove(id);
+            return null;
+        });
+    }
+
+    public void setStatus(int id, Beneficiary.Status status) {
+        repository.update(db -> {
+            Beneficiary existing = db.beneficiaries.get(id);
+            if (existing == null) throw new IllegalArgumentException("Beneficiary not found ID: " + id);
+            Beneficiary updated = new Beneficiary(id, existing.getName(), existing.getContact(), existing.getAddress(), status);
+            db.beneficiaries.put(id, updated);
+            return null;
+        });
+    }
+
+    // --- NEEDS & REQUESTS CRUD ---
+    public NeedAssessment addNeeds(int beneficiaryId, String resourceNeeds, String serviceNeeds, String notes) {
+        return repository.update(db -> {
+            if (!db.beneficiaries.containsKey(beneficiaryId)) throw new IllegalArgumentException("Beneficiary not found");
+            NeedAssessment n = new NeedAssessment(db.nextId++, beneficiaryId, resourceNeeds, serviceNeeds, notes, now());
+            db.needs.put(n.getId(), n);
+            return n;
+        });
+    }
+
+    public List<NeedAssessment> listNeeds() {
+        return repository.read(db -> new ArrayList<>(db.needs.values()));
+    }
+
+    public AssistanceRequest requestResource(int beneficiaryId, int resourceId, int quantity, String description) {
+        return repository.update(db -> {
+            if (!db.beneficiaries.containsKey(beneficiaryId)) throw new IllegalArgumentException("Beneficiary not found");
+            if (!db.resources.containsKey(resourceId)) throw new IllegalArgumentException("Resource not found");
+            AssistanceRequest r = new AssistanceRequest(
+                    db.nextId++, beneficiaryId, AssistanceRequest.Type.RESOURCE, resourceId,
+                    quantity, 0, description, AssistanceRequest.Status.PENDING, now()
+            );
+            db.requests.put(r.getId(), r);
+            return r;
+        });
+    }
+
+    public AssistanceRequest requestService(int beneficiaryId, String description) {
+        return repository.update(db -> {
+            if (!db.beneficiaries.containsKey(beneficiaryId)) throw new IllegalArgumentException("Beneficiary not found");
+            AssistanceRequest r = new AssistanceRequest(
+                    db.nextId++, beneficiaryId, AssistanceRequest.Type.SERVICE, 0,
+                    1, 0, description, AssistanceRequest.Status.PENDING, now()
+            );
+            db.requests.put(r.getId(), r);
+            return r;
+        });
+    }
+
+    public List<AssistanceRequest> listRequests() {
+        return repository.read(db -> new ArrayList<>(db.requests.values()));
+    }
+
+    public void cancelRequest(int requestId) {
+        repository.update(db -> {
+            AssistanceRequest r = db.requests.get(requestId);
+            if (r == null) throw new IllegalArgumentException("Request not found ID: " + requestId);
+            AssistanceRequest cancelled = new AssistanceRequest(
+                    r.getId(), r.getBeneficiaryId(), r.getType(), r.getResourceId(),
+                    r.getQuantity(), r.getFulfilledQuantity(), r.getDescription(), AssistanceRequest.Status.CANCELLED, r.getCreatedAt()
+            );
+            db.requests.put(requestId, cancelled);
+            return null;
+        });
+    }
+
+    // --- INVENTORY / RESOURCE CRUD ---
+    public Resource addResource(String name, String category, int stock) {
+        return repository.update(db -> {
+            Resource r = new Resource(db.nextId++, name, category, stock);
+            db.resources.put(r.getId(), r);
+            return r;
+        });
+    }
+
+    public List<Resource> listResources() {
+        return repository.read(db -> new ArrayList<>(db.resources.values()));
+    }
+
+    public void restock(int resourceId, int amount) {
+        repository.update(db -> {
+            Resource existing = db.resources.get(resourceId);
+            if (existing == null) throw new IllegalArgumentException("Resource not found");
+            Resource updated = new Resource(resourceId, existing.getName(), existing.getCategory(), existing.getStock() + amount);
+            db.resources.put(resourceId, updated);
+            return null;
+        });
+    }
+
+    public void deleteResource(int resourceId) {
+        repository.update(db -> {
+            if (!db.resources.containsKey(resourceId)) throw new IllegalArgumentException("Resource not found");
+            db.resources.remove(resourceId);
+            return null;
+        });
+    }
+
+    public ResourceDistribution distribute(int beneficiaryId, int resourceId, int quantity, int requestId, String notes) {
+        return repository.update(db -> {
+            Beneficiary b = db.beneficiaries.get(beneficiaryId);
+            if (b == null) throw new IllegalArgumentException("Beneficiary not found");
+            Resource r = db.resources.get(resourceId);
+            if (r == null) throw new IllegalArgumentException("Resource not found");
+
+            if (r.getStock() < quantity) throw new IllegalArgumentException("Insufficient stock: only " + r.getStock() + " available");
+
+            // Update resource stock
+            Resource updatedResource = new Resource(resourceId, r.getName(), r.getCategory(), r.getStock() - quantity);
+            db.resources.put(resourceId, updatedResource);
+
+            // Update linked assistance request if present
+            if (requestId > 0) {
+                AssistanceRequest req = db.requests.get(requestId);
+                if (req != null) {
+                    int newFulfilled = req.getFulfilledQuantity() + quantity;
+                    AssistanceRequest.Status newStatus = newFulfilled >= req.getQuantity() ?
+                            AssistanceRequest.Status.FULFILLED : AssistanceRequest.Status.IN_PROGRESS;
+                    AssistanceRequest updatedReq = new AssistanceRequest(
+                            req.getId(), req.getBeneficiaryId(), req.getType(), req.getResourceId(),
+                            req.getQuantity(), newFulfilled, req.getDescription(), newStatus, req.getCreatedAt()
+                    );
+                    db.requests.put(requestId, updatedReq);
+                }
             }
-            return matches;
-        });
-    }
-    // BEN-03
-    public NeedAssessment assessNeeds(int beneficiaryId,String resources,String services,String notes) {
-        String r=optional(resources), s=optional(services);
-        if (r.isEmpty() && s.isEmpty()) throw new IllegalArgumentException("Enter a resource need or service need");
-        return repository.change(d -> {
-            beneficiary(d,beneficiaryId);
-            NeedAssessment a=new NeedAssessment(id(d),beneficiaryId,r,s,optional(notes),time());
-            d.needs.put(a.getId(),a); return a;
-        });
-    }
-    public List<NeedAssessment> assessments() { return repository.read(d -> new ArrayList<>(d.needs.values())); }
 
-    // BEN-04: requests can be recorded independently of resource availability.
-    public AssistanceRequest requestResource(int beneficiaryId,int resourceId,int quantity,String description) {
-        if (quantity<=0) throw new IllegalArgumentException("Quantity must be positive");
-        final String desc=required(description,"Request description");
-        return repository.change(d -> {
-            beneficiary(d,beneficiaryId); resource(d,resourceId);
-            AssistanceRequest r=new AssistanceRequest(id(d),beneficiaryId,AssistanceRequest.Type.RESOURCE,
-                    resourceId,quantity,0,desc,AssistanceRequest.Status.PENDING,time());
-            d.requests.put(r.getId(),r); return r;
+            ResourceDistribution dist = new ResourceDistribution(db.nextId++, beneficiaryId, resourceId, quantity, requestId, notes, now());
+            db.distributions.put(dist.getId(), dist);
+            return dist;
         });
     }
-    public AssistanceRequest requestService(int beneficiaryId,String description) {
-        final String desc=required(description,"Service description");
-        return repository.change(d -> {
-            beneficiary(d,beneficiaryId);
-            AssistanceRequest r=new AssistanceRequest(id(d),beneficiaryId,AssistanceRequest.Type.SERVICE,
-                    0,0,0,desc,AssistanceRequest.Status.PENDING,time());
-            d.requests.put(r.getId(),r); return r;
-        });
-    }
-    public AssistanceRequest cancelRequest(int requestId) {
-        return repository.change(d -> {
-            AssistanceRequest r=request(d,requestId);
-            if (r.getStatus()==AssistanceRequest.Status.FULFILLED || r.getStatus()==AssistanceRequest.Status.CANCELLED)
-                throw new IllegalArgumentException("Request already closed");
-            if (r.getFulfilledQuantity()>0) throw new IllegalArgumentException("Cannot cancel a partially fulfilled request");
-            AssistanceRequest changed=new AssistanceRequest(r.getId(),r.getBeneficiaryId(),r.getType(),
-                    r.getResourceId(),r.getQuantity(),r.getFulfilledQuantity(),r.getDescription(),
-                    AssistanceRequest.Status.CANCELLED,r.getCreatedAt());
-            d.requests.put(requestId,changed); return changed;
-        });
-    }
-    public List<AssistanceRequest> requests() { return repository.read(d -> new ArrayList<>(d.requests.values())); }
 
-    // BEN-05, BEN-08
-    public Resource addResource(String name,String category,int stock) {
-        if (stock<0) throw new IllegalArgumentException("Initial stock cannot be negative");
-        final String n=required(name,"Resource name"), c=required(category,"Category");
-        return repository.change(d -> {
-            Resource r=new Resource(id(d),n,c,stock);
-            d.resources.put(r.getId(),r); return r;
-        });
+    public List<ResourceDistribution> listDistributions() {
+        return repository.read(db -> new ArrayList<>(db.distributions.values()));
     }
-    public Resource restock(int resourceId,int quantity) {
-        return repository.change(d -> {
-            inventory.replenish(d,resourceId,quantity);
-            return resource(d,resourceId);
-        });
-    }
-    /** BEN-08 delete: only resources never requested or distributed. */
-    public Resource deleteResource(int resourceId) {
-        return repository.change(d -> {
-            Resource r=resource(d,resourceId);
-            boolean used=d.requests.values().stream().anyMatch(x -> x.getResourceId()==resourceId)
-                    || d.distributions.values().stream().anyMatch(x -> x.getResourceId()==resourceId);
-            if (used) throw new IllegalArgumentException("Resource #" + resourceId
-                    + " is used by requests or distributions and cannot be deleted.");
-            d.resources.remove(resourceId); return r;
-        });
-    }
-    public boolean canDistribute(int resourceId,int quantity) {
-        return repository.read(d -> inventory.isAvailable(d,resourceId,quantity));
-    }
-    public List<Resource> resources() { return repository.read(d -> new ArrayList<>(d.resources.values())); }
 
-    /** 0 requestId means an unlinked distribution. Stock and request are updated in one transaction. */
-    public ResourceDistribution distribute(int beneficiaryId,int resourceId,int quantity,int requestId,String notes) {
-        if (quantity<=0) throw new IllegalArgumentException("Quantity must be positive");
-        return repository.change(d -> {
-            beneficiary(d,beneficiaryId); resource(d,resourceId);
-            AssistanceRequest req=null;
-            if (requestId!=0) {
-                req=request(d,requestId);
-                if (req.getBeneficiaryId()!=beneficiaryId || req.getType()!=AssistanceRequest.Type.RESOURCE
-                        || req.getResourceId()!=resourceId) throw new IllegalArgumentException("Request does not match beneficiary and resource");
-                if (req.getStatus()==AssistanceRequest.Status.CANCELLED || req.getStatus()==AssistanceRequest.Status.FULFILLED)
-                    throw new IllegalArgumentException("Request is closed");
-                if (quantity>req.getQuantity()-req.getFulfilledQuantity())
-                    throw new IllegalArgumentException("Quantity exceeds unfulfilled request amount");
+    // --- SERVICES & IMPACT CRUD ---
+    public ServiceRecord recordService(int beneficiaryId, String serviceName, int requestId, String notes) {
+        return repository.update(db -> {
+            if (!db.beneficiaries.containsKey(beneficiaryId)) throw new IllegalArgumentException("Beneficiary not found");
+            if (requestId > 0) {
+                AssistanceRequest req = db.requests.get(requestId);
+                if (req != null) {
+                    int newFulfilled = req.getFulfilledQuantity() + 1;
+                    AssistanceRequest.Status newStatus = newFulfilled >= req.getQuantity() ?
+                            AssistanceRequest.Status.FULFILLED : AssistanceRequest.Status.IN_PROGRESS;
+                    AssistanceRequest updatedReq = new AssistanceRequest(
+                            req.getId(), req.getBeneficiaryId(), req.getType(), req.getResourceId(),
+                            req.getQuantity(), newFulfilled, req.getDescription(), newStatus, req.getCreatedAt()
+                    );
+                    db.requests.put(requestId, updatedReq);
+                }
             }
-            inventory.deduct(d,resourceId,quantity);
-            ResourceDistribution distribution=new ResourceDistribution(id(d),beneficiaryId,resourceId,quantity,requestId,optional(notes),time());
-            d.distributions.put(distribution.getId(),distribution);
-            if (req!=null) {
-                int fulfilled=req.getFulfilledQuantity()+quantity;
-                AssistanceRequest.Status status=fulfilled==req.getQuantity()
-                        ? AssistanceRequest.Status.FULFILLED : AssistanceRequest.Status.IN_PROGRESS;
-                d.requests.put(req.getId(),new AssistanceRequest(req.getId(),req.getBeneficiaryId(),req.getType(),
-                        req.getResourceId(),req.getQuantity(),fulfilled,req.getDescription(),status,req.getCreatedAt()));
-            }
-            return distribution;
-        });
-    }
-    public List<ResourceDistribution> distributions() { return repository.read(d -> new ArrayList<>(d.distributions.values())); }
-
-    // BEN-06: optional service request is closed when the service is delivered.
-    public ServiceRecord recordService(int beneficiaryId,String serviceName,int requestId,String notes) {
-        final String name=required(serviceName,"Service name");
-        return repository.change(d -> {
-            beneficiary(d,beneficiaryId);
-            if (requestId!=0) {
-                AssistanceRequest req=request(d,requestId);
-                if (req.getBeneficiaryId()!=beneficiaryId || req.getType()!=AssistanceRequest.Type.SERVICE)
-                    throw new IllegalArgumentException("Service request does not match beneficiary");
-                if (req.getStatus()==AssistanceRequest.Status.CANCELLED || req.getStatus()==AssistanceRequest.Status.FULFILLED)
-                    throw new IllegalArgumentException("Request is closed");
-                d.requests.put(req.getId(),new AssistanceRequest(req.getId(),req.getBeneficiaryId(),req.getType(),
-                        0,0,0,req.getDescription(),AssistanceRequest.Status.FULFILLED,req.getCreatedAt()));
-            }
-            ServiceRecord record=new ServiceRecord(id(d),beneficiaryId,requestId,name,optional(notes),time());
-            d.services.put(record.getId(),record); return record;
-        });
-    }
-    public List<ServiceRecord> services() { return repository.read(d -> new ArrayList<>(d.services.values())); }
-
-    // BEN-09
-    public ImpactRecord recordImpact(int beneficiaryId,String outcome,String notes) {
-        final String result=required(outcome,"Outcome");
-        return repository.change(d -> {
-            beneficiary(d,beneficiaryId);
-            ImpactRecord impact=new ImpactRecord(id(d),beneficiaryId,result,optional(notes),time());
-            d.impacts.put(impact.getId(),impact); return impact;
-        });
-    }
-    public List<ImpactRecord> impacts() { return repository.read(d -> new ArrayList<>(d.impacts.values())); }
-
-    // BEN-09: concise, evidence-based impact summary (no invented success scores).
-    public String impactSummary(int beneficiaryId) {
-        return repository.read(d -> {
-            Beneficiary b=beneficiary(d,beneficiaryId);
-            int needs=0, requests=0, completed=0, pending=0, units=0, serviceCount=0, outcomes=0;
-            String lastOutcome="Not assessed yet";
-            for (NeedAssessment r:d.needs.values()) if (r.getBeneficiaryId()==beneficiaryId) needs++;
-            for (AssistanceRequest r:d.requests.values()) if (r.getBeneficiaryId()==beneficiaryId) {
-                requests++;
-                if (r.getStatus()==AssistanceRequest.Status.FULFILLED) completed++;
-                if (r.getStatus()==AssistanceRequest.Status.PENDING || r.getStatus()==AssistanceRequest.Status.IN_PROGRESS) pending++;
-            }
-            for (ResourceDistribution r:d.distributions.values()) if (r.getBeneficiaryId()==beneficiaryId) units+=r.getQuantity();
-            for (ServiceRecord r:d.services.values()) if (r.getBeneficiaryId()==beneficiaryId) serviceCount++;
-            for (ImpactRecord r:d.impacts.values()) if (r.getBeneficiaryId()==beneficiaryId) {
-                outcomes++; lastOutcome=r.getOutcome()+" ("+r.getCreatedAt()+")";
-            }
-            return "PROGRAM IMPACT SUMMARY\nBeneficiary: "+b.getName()+" (#"+b.getId()+")\n"
-                    +"Need status: "+b.getStatus()+"\n"
-                    +"Needs assessments: "+needs+"\n"
-                    +"Assistance requests: "+requests+" (fulfilled: "+completed+", open: "+pending+")\n"
-                    +"Resource units delivered: "+units+"\n"
-                    +"Services delivered: "+serviceCount+"\n"
-                    +"Outcome assessments: "+outcomes+"\n"
-                    +"Latest recorded outcome: "+lastOutcome;
+            ServiceRecord s = new ServiceRecord(db.nextId++, beneficiaryId, requestId, serviceName, notes, now());
+            db.services.put(s.getId(), s);
+            return s;
         });
     }
 
-    // BEN-07: chronological assistance history across types.
+    public List<ServiceRecord> listServices() {
+        return repository.read(db -> new ArrayList<>(db.services.values()));
+    }
+
+    public ImpactRecord recordImpact(int beneficiaryId, String outcome, String notes) {
+        return repository.update(db -> {
+            if (!db.beneficiaries.containsKey(beneficiaryId)) throw new IllegalArgumentException("Beneficiary not found");
+            ImpactRecord imp = new ImpactRecord(db.nextId++, beneficiaryId, outcome, notes, now());
+            db.impacts.put(imp.getId(), imp);
+            return imp;
+        });
+    }
+
+    public List<ImpactRecord> listImpacts() {
+        return repository.read(db -> new ArrayList<>(db.impacts.values()));
+    }
+
     public String history(int beneficiaryId) {
-        return repository.read(d -> {
-            Beneficiary b=beneficiary(d,beneficiaryId);
-            StringBuilder text=new StringBuilder("BENEFICIARY #"+b.getId()+" — "+b.getName()+"\n");
-            text.append("Contact: ").append(b.getContact()).append("\nNeed status: ").append(b.getStatus()).append("\n\n");
-            for (NeedAssessment a:d.needs.values()) if (a.getBeneficiaryId()==beneficiaryId)
-                text.append("NEED  ").append(a.getCreatedAt()).append(" | Resources: ").append(a.getResourceNeeds())
-                        .append(" | Services: ").append(a.getServiceNeeds()).append(" | ").append(a.getNotes()).append("\n");
-            for (AssistanceRequest r:d.requests.values()) if (r.getBeneficiaryId()==beneficiaryId)
-                text.append("REQUEST #").append(r.getId()).append(" ").append(r.getType())
-                        .append(" ").append(r.getStatus()).append(" | ").append(r.getDescription()).append("\n");
-            for (ResourceDistribution x:d.distributions.values()) if (x.getBeneficiaryId()==beneficiaryId)
-                text.append("AID  ").append(x.getCreatedAt()).append(" | ").append(x.getQuantity())
-                        .append(" x ").append(resource(d,x.getResourceId()).getName()).append("\n");
-            for (ServiceRecord x:d.services.values()) if (x.getBeneficiaryId()==beneficiaryId)
-                text.append("SERVICE  ").append(x.getCreatedAt()).append(" | ").append(x.getServiceName()).append("\n");
-            for (ImpactRecord x:d.impacts.values()) if (x.getBeneficiaryId()==beneficiaryId)
-                text.append("IMPACT  ").append(x.getCreatedAt()).append(" | ").append(x.getOutcome())
-                        .append(" | ").append(x.getNotes()).append("\n");
-            return text.toString();
+        return repository.read(db -> {
+            StringBuilder sb = new StringBuilder("Assistance History for Beneficiary #" + beneficiaryId + "\n\n");
+            sb.append("DISTRIBUTIONS:\n");
+            for (ResourceDistribution d : db.distributions.values()) {
+                if (d.getBeneficiaryId() == beneficiaryId) {
+                    sb.append("- ").append(d.getCreatedAt()).append(": Resource #").append(d.getResourceId())
+                            .append(" x").append(d.getQuantity()).append("\n");
+                }
+            }
+            sb.append("\nSERVICES:\n");
+            for (ServiceRecord s : db.services.values()) {
+                if (s.getBeneficiaryId() == beneficiaryId) {
+                    sb.append("- ").append(s.getCreatedAt()).append(": ").append(s.getServiceName()).append("\n");
+                }
+            }
+            return sb.toString();
         });
+    }
+
+    public String impactSummary(int beneficiaryId) {
+        return repository.read(db -> {
+            StringBuilder sb = new StringBuilder("Impact Summary for Beneficiary #" + beneficiaryId + "\n\n");
+            for (ImpactRecord i : db.impacts.values()) {
+                if (i.getBeneficiaryId() == beneficiaryId) {
+                    sb.append("- ").append(i.getCreatedAt()).append(": ").append(i.getOutcome()).append("\n");
+                }
+            }
+            return sb.toString();
+        });
+    }
+
+    public List<CrudMatrix.Row> crudMatrix() {
+        return CrudMatrix.rows();
     }
 }
