@@ -62,6 +62,20 @@ public final class BeneficiaryService {
             d.beneficiaries.put(b.getId(),updated); return updated;
         });
     }
+    /** BEN-02 delete: only beneficiaries with no assistance history, so aid records are never orphaned. */
+    public Beneficiary deleteBeneficiary(int beneficiaryId) {
+        return repository.change(d -> {
+            Beneficiary b=beneficiary(d,beneficiaryId);
+            boolean linked=d.needs.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
+                    || d.requests.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
+                    || d.distributions.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
+                    || d.services.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId)
+                    || d.impacts.values().stream().anyMatch(x -> x.getBeneficiaryId()==beneficiaryId);
+            if (linked) throw new IllegalArgumentException("Beneficiary #" + beneficiaryId
+                    + " has assistance history and cannot be deleted. Change their status instead.");
+            d.beneficiaries.remove(beneficiaryId); return b;
+        });
+    }
     public List<Beneficiary> beneficiaries() {
         return repository.read(d -> new ArrayList<>(d.beneficiaries.values()));
     }
@@ -143,6 +157,17 @@ public final class BeneficiaryService {
         return repository.change(d -> {
             inventory.replenish(d,resourceId,quantity);
             return resource(d,resourceId);
+        });
+    }
+    /** BEN-08 delete: only resources never requested or distributed. */
+    public Resource deleteResource(int resourceId) {
+        return repository.change(d -> {
+            Resource r=resource(d,resourceId);
+            boolean used=d.requests.values().stream().anyMatch(x -> x.getResourceId()==resourceId)
+                    || d.distributions.values().stream().anyMatch(x -> x.getResourceId()==resourceId);
+            if (used) throw new IllegalArgumentException("Resource #" + resourceId
+                    + " is used by requests or distributions and cannot be deleted.");
+            d.resources.remove(resourceId); return r;
         });
     }
     public boolean canDistribute(int resourceId,int quantity) {
@@ -247,18 +272,18 @@ public final class BeneficiaryService {
             text.append("Contact: ").append(b.getContact()).append("\nNeed status: ").append(b.getStatus()).append("\n\n");
             for (NeedAssessment a:d.needs.values()) if (a.getBeneficiaryId()==beneficiaryId)
                 text.append("NEED  ").append(a.getCreatedAt()).append(" | Resources: ").append(a.getResourceNeeds())
-                    .append(" | Services: ").append(a.getServiceNeeds()).append(" | ").append(a.getNotes()).append("\n");
+                        .append(" | Services: ").append(a.getServiceNeeds()).append(" | ").append(a.getNotes()).append("\n");
             for (AssistanceRequest r:d.requests.values()) if (r.getBeneficiaryId()==beneficiaryId)
                 text.append("REQUEST #").append(r.getId()).append(" ").append(r.getType())
-                    .append(" ").append(r.getStatus()).append(" | ").append(r.getDescription()).append("\n");
+                        .append(" ").append(r.getStatus()).append(" | ").append(r.getDescription()).append("\n");
             for (ResourceDistribution x:d.distributions.values()) if (x.getBeneficiaryId()==beneficiaryId)
                 text.append("AID  ").append(x.getCreatedAt()).append(" | ").append(x.getQuantity())
-                    .append(" x ").append(resource(d,x.getResourceId()).getName()).append("\n");
+                        .append(" x ").append(resource(d,x.getResourceId()).getName()).append("\n");
             for (ServiceRecord x:d.services.values()) if (x.getBeneficiaryId()==beneficiaryId)
                 text.append("SERVICE  ").append(x.getCreatedAt()).append(" | ").append(x.getServiceName()).append("\n");
             for (ImpactRecord x:d.impacts.values()) if (x.getBeneficiaryId()==beneficiaryId)
                 text.append("IMPACT  ").append(x.getCreatedAt()).append(" | ").append(x.getOutcome())
-                    .append(" | ").append(x.getNotes()).append("\n");
+                        .append(" | ").append(x.getNotes()).append("\n");
             return text.toString();
         });
     }

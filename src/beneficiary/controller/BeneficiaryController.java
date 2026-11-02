@@ -10,6 +10,9 @@ public final class BeneficiaryController {
     public BeneficiaryController(BeneficiaryService service) { this.service=service; }
     public Beneficiary register(String name,String contact,String address) { return service.register(name,contact,address); }
     public Beneficiary update(int id,String name,String contact,String address) { return service.update(id,name,contact,address); }
+    public Beneficiary deleteBeneficiary(int id) { return service.deleteBeneficiary(id); }
+    public Resource deleteResource(int resourceId) { return service.deleteResource(resourceId); }
+    public List<CrudMatrix.Row> crudMatrix() { return CrudMatrix.rows(); }
     public Beneficiary setStatus(int id,Beneficiary.Status status) { return service.setNeedStatus(id,status); }
     public List<Beneficiary> listBeneficiaries(String search) { return service.search(search); }
     public NeedAssessment addNeeds(int id,String resources,String services,String notes) { return service.assessNeeds(id,resources,services,notes); }

@@ -28,6 +28,7 @@ public final class BeneficiaryPanel extends JPanel {
         tabs.addTab("Needs & Requests",needsTab());
         tabs.addTab("Inventory & Aid",inventoryTab());
         tabs.addTab("Services & Impact",servicesTab());
+        tabs.addTab("CRUD Matrix",crudMatrixTab());
         add(tabs,BorderLayout.CENTER);
         refresh();
     }
@@ -125,6 +126,12 @@ public final class BeneficiaryPanel extends JPanel {
                     "Change status",JOptionPane.QUESTION_MESSAGE,null,Beneficiary.Status.values(),Beneficiary.Status.PENDING);
             if (choice!=null) controller.setStatus(id,choice);
         }));
+        JButton delete=button("Delete Selected",()->action(()->{
+            int id=selectedId(beneficiaries);
+            if (JOptionPane.showConfirmDialog(this,"Delete beneficiary #"+id+"?","Confirm delete",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)==JOptionPane.YES_OPTION)
+                controller.deleteBeneficiary(id);
+        }));
         JButton history=button("View History",()->action(()->{
             int id=selectedId(beneficiaries);
             JTextArea text=new JTextArea(controller.history(id),22,70);
@@ -136,7 +143,7 @@ public final class BeneficiaryPanel extends JPanel {
         query.add(new JLabel("Search by name, ID, or contact:"));
         query.add(search); query.add(find); query.add(clear);
         top.add(query,BorderLayout.NORTH);
-        top.add(buttons("",add,edit,status,history),BorderLayout.SOUTH);
+        top.add(buttons("",add,edit,delete,status,history),BorderLayout.SOUTH);
         return withToolbar(pane(beneficiaries),top);
     }
     private JPanel needsTab() {
@@ -181,6 +188,12 @@ public final class BeneficiaryPanel extends JPanel {
             String[] x=prompt("Restock #"+resourceId,new String[]{"Quantity to add"},"1");
             if (x!=null) controller.restock(resourceId,number(x[0],"Quantity"));
         }));
+        JButton removeResource=button("Delete Selected",()->action(()->{
+            int resourceId=selectedId(resources);
+            if (JOptionPane.showConfirmDialog(this,"Delete resource #"+resourceId+"?","Confirm delete",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)==JOptionPane.YES_OPTION)
+                controller.deleteResource(resourceId);
+        }));
         JButton distribute=button("+ Distribute Aid",()->action(()->{
             Integer b=chooseBeneficiary();if(b==null)return;
             Integer r=chooseResource();if(r==null)return;
@@ -188,7 +201,7 @@ public final class BeneficiaryPanel extends JPanel {
             if (x!=null) controller.distribute(b,r,number(x[0],"Quantity"),number(x[1],"Request ID"),x[2]);
         }));
         JSplitPane split=new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                withToolbar(pane(resources),buttons("Resource inventory:",add,restock)),
+                withToolbar(pane(resources),buttons("Resource inventory:",add,restock,removeResource)),
                 withToolbar(pane(distributions),buttons("Distribution history:",distribute)));
         split.setResizeWeight(.47);
         return split;
@@ -216,6 +229,42 @@ public final class BeneficiaryPanel extends JPanel {
                 withToolbar(pane(services),buttons("Delivered services:",add)),
                 withToolbar(pane(impacts),buttons("Program outcomes:",impact,report)));
         split.setResizeWeight(.5);return split;
+    }
+    /** Read-only CRUD matrix: requirements (rows) x entities (columns). */
+    private JComponent crudMatrixTab() {
+        String[] columns=new String[CrudMatrix.ENTITIES.length+2];
+        columns[0]="ID"; columns[1]="Requirement";
+        System.arraycopy(CrudMatrix.ENTITIES,0,columns,2,CrudMatrix.ENTITIES.length);
+        DefaultTableModel m=model(columns);
+        for (CrudMatrix.Row r:controller.crudMatrix()) {
+            Object[] row=new Object[columns.length];
+            row[0]=r.getId(); row[1]=r.getRequirement();
+            for (int i=0;i<CrudMatrix.ENTITIES.length;i++) row[i+2]=r.get(CrudMatrix.ENTITIES[i]);
+            m.addRow(row);
+        }
+        JTable table=new JTable(m);
+        table.setRowHeight(26);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        javax.swing.table.DefaultTableCellRenderer center=new javax.swing.table.DefaultTableCellRenderer();
+        center.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getColumnModel().getColumn(0).setPreferredWidth(60);
+        table.getColumnModel().getColumn(1).setPreferredWidth(300);
+        for (int i=2;i<columns.length;i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(center);
+            // width follows the entity name so every header stays readable
+            table.getColumnModel().getColumn(i).setPreferredWidth(Math.max(80,columns[i].length()*8+10));
+        }
+        JLabel title=new JLabel("CRUD Matrix — Beneficiary Management Module");
+        title.setFont(title.getFont().deriveFont(Font.BOLD,15f));
+        JTextArea notes=new JTextArea(CrudMatrix.NOTES,2,80);
+        notes.setEditable(false); notes.setLineWrap(true); notes.setWrapStyleWord(true); notes.setOpaque(false);
+        JPanel panel=new JPanel(new BorderLayout(0,8));
+        panel.setBorder(BorderFactory.createEmptyBorder(8,4,4,4));
+        panel.add(title,BorderLayout.NORTH);
+        panel.add(new JScrollPane(table),BorderLayout.CENTER);
+        panel.add(notes,BorderLayout.SOUTH);
+        return panel;
     }
     public void refresh() {
         refreshBeneficiaries();
