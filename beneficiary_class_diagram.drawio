@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="beneficiary-uml" name="Class Diagram">
+    <mxGraphModel dx="1713" dy="1101" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="light-dark(#FFFFFF,#FFFFFF)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bs" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#2D1A12;swimlaneFillColor=#2D1A12;strokeColor=#C0622A;fontColor=#F0E6DC;fontSize=14;" value="BeneficiaryService" vertex="1">
+          <mxGeometry height="138" width="340" x="160" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bs_attr" parent="bs" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="-InventoryManager inventory" vertex="1">
+          <mxGeometry height="30" width="340" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bs_line" parent="bs" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#C0622A;" value="" vertex="1">
+          <mxGeometry height="8" width="340" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bs_ops" parent="bs" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="+distribute()&lt;br&gt;+restock()&lt;br&gt;+canDistribute()" vertex="1">
+          <mxGeometry height="70" width="340" y="68" as="geometry" />
+        </mxCell>
+        <mxCell id="im" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=46;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#2D1A12;swimlaneFillColor=#2D1A12;strokeColor=#C0622A;fontColor=#F0E6DC;fontSize=14;" value="«Singleton»&lt;br&gt;&lt;b&gt;InventoryManager&lt;/b&gt;" vertex="1">
+          <mxGeometry height="184" width="380" x="80" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="im_attr" parent="im" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="-InventoryManager INSTANCE" vertex="1">
+          <mxGeometry height="30" width="380" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="im_line" parent="im" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#C0622A;" value="" vertex="1">
+          <mxGeometry height="8" width="380" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="im_ops" parent="im" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="-InventoryManager()&lt;br&gt;+getInstance() : InventoryManager&lt;br&gt;+isAvailable() : boolean&lt;br&gt;+deduct() : void&lt;br&gt;+replenish() : void" vertex="1">
+          <mxGeometry height="100" width="380" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="br" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#2D1A12;swimlaneFillColor=#2D1A12;strokeColor=#C0622A;fontColor=#F0E6DC;fontSize=14;" value="BeneficiaryRepository" vertex="1">
+          <mxGeometry height="118" width="220" x="510" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="br_attr" parent="br" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="-Data current" vertex="1">
+          <mxGeometry height="30" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="br_line" parent="br" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#C0622A;" value="" vertex="1">
+          <mxGeometry height="8" width="220" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="br_ops" parent="br" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="+read()&lt;br&gt;+change()" vertex="1">
+          <mxGeometry height="50" width="220" y="68" as="geometry" />
+        </mxCell>
+        <mxCell id="res" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#2D1A12;swimlaneFillColor=#2D1A12;strokeColor=#C0622A;fontColor=#F0E6DC;fontSize=14;" value="Resource" vertex="1">
+          <mxGeometry height="138" width="170" x="220" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="res_attr" parent="res" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="-int id&lt;br&gt;-String name&lt;br&gt;-int stock" vertex="1">
+          <mxGeometry height="70" width="170" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="res_line" parent="res" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#C0622A;" value="" vertex="1">
+          <mxGeometry height="8" width="170" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res_ops" parent="res" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;fontColor=#F0E6DC;fontSize=13;" value="" vertex="1">
+          <mxGeometry height="30" width="170" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="bs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=10;strokeColor=#AAAAAA;fontColor=#F0E6DC;labelBackgroundColor=#3A2418;fontSize=13;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.479;entryY=0;entryDx=0;entryDy=0;" target="im" value="uses shared instance">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="bs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=10;strokeColor=#AAAAAA;fontColor=#F0E6DC;labelBackgroundColor=#3A2418;fontSize=13;exitX=0.67;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="br" value="coordinates transactions">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="im" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;endArrow=open;endSize=10;strokeColor=#AAAAAA;fontColor=#F0E6DC;labelBackgroundColor=#3A2418;fontSize=13;exitX=0.592;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="res" value="checks and updates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="br" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;startArrow=diamondThin;startFill=0;startSize=14;endArrow=none;strokeColor=#AAAAAA;fontColor=#F0E6DC;labelBackgroundColor=#3A2418;fontSize=13;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.65;entryY=0;entryDx=0;entryDy=0;" target="res" value="stores">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
