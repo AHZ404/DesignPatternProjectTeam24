@@ -20,6 +20,7 @@ public final class JsonRepository {
         this.mapper = new ObjectMapper();
         this.mapper.enable(SerializationFeature.INDENT_OUTPUT);
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        this.mapper.registerModule(new JavaTimeJsonModule());
 
         // Polymorphic typing so polymorphic interface fields like IPaymentStrategy persist correctly
         this.mapper.activateDefaultTyping(
