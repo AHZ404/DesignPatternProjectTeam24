@@ -1,5 +1,6 @@
 package volunteer.view;
 
+import database.DatabaseObserver;
 import volunteer.controller.VolunteerController;
 import volunteer.model.AvailabilitySlot;
 import volunteer.model.CertificateType;
@@ -43,7 +44,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class VolunteerPanel extends JPanel {
+public class VolunteerPanel extends JPanel implements DatabaseObserver {
     private static final DateTimeFormatter DT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final VolunteerController controller;
@@ -99,31 +100,41 @@ public class VolunteerPanel extends JPanel {
     private final JComboBox<CertificateType> certTypeBox = new JComboBox<>(CertificateType.values());
     private final JTextArea certificateArea = new JTextArea(14, 54);
 
-    public VolunteerPanel(VolunteerController controller) {
+    private final Integer me; // null = admin view, otherwise the logged-in volunteer
+
+    public VolunteerPanel(VolunteerController controller) { this(controller, null); }
+
+    public VolunteerPanel(VolunteerController controller, Integer volunteerId) {
         this.controller = controller;
+        this.me = volunteerId;
         controller.setView(this);
         setLayout(new BorderLayout());
 
         JTabbedPane tabs = new JTabbedPane();
-        tabs.addTab("Volunteers", buildVolunteersTab());
-        tabs.addTab("Tasks", buildTasksTab());
-        tabs.addTab("Assignments & Hours", buildAssignmentsTab());
+        tabs.addTab(me == null ? "Volunteers" : "My Profile", buildVolunteersTab());
+        if (me == null) tabs.addTab("Tasks", buildTasksTab());
+        tabs.addTab(me == null ? "Assignments & Hours" : "My Assignments & Hours", buildAssignmentsTab());
         tabs.addTab("History & Certificates", buildHistoryTab());
         add(tabs, BorderLayout.CENTER);
 
         statusBar.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
         add(statusBar, BorderLayout.SOUTH);
         refresh();
+        if (me != null) loadSelectedVolunteer(); // fill the profile form with the logged-in volunteer
     }
 
     private JComponent buildVolunteersTab() {
         JPanel form = titled("Volunteer profile (VOL-01, VOL-02)", new GridLayout(0, 1));
         form.add(row(new JLabel("Name"), nameField, new JLabel("Email"), emailField, new JLabel("Phone"), phoneField,
                 new JLabel("Preferences (comma separated)"), prefsField));
-        form.add(row(
+        JButton update = button("Update selected", e -> controller.handleUpdateProfile(selectedId(volunteerTable), nameField.getText(), emailField.getText(), phoneField.getText(), prefsField.getText()));
+        JButton deactivate = button("Deactivate", e -> controller.handleDeactivate(selectedId(volunteerTable)));
+        if (me != null) {
+            update.setText("Save my profile");
+            form.add(row(update, deactivate, button("Activate", e -> controller.handleActivate(me))));
+        } else form.add(row(
                 button("Register", e -> controller.handleRegister(nameField.getText(), emailField.getText(), phoneField.getText(), prefsField.getText())),
-                button("Update selected", e -> controller.handleUpdateProfile(selectedId(volunteerTable), nameField.getText(), emailField.getText(), phoneField.getText(), prefsField.getText())),
-                button("Deactivate", e -> controller.handleDeactivate(selectedId(volunteerTable))),
+                update, deactivate,
                 button("Activate", e -> controller.handleActivate(selectedId(volunteerTable))),
                 button("Clear form", e -> clearVolunteerForm()),
                 new JLabel("     Search"), searchField,
@@ -206,11 +217,14 @@ public class VolunteerPanel extends JPanel {
                 (VolunteerTask) assignTaskBox.getSelectedItem(), roleField.getText())));
         assign.add(new JLabel("   Acting as: " + controller.getCurrentUser().getName()));
 
+        JButton complete = button("Mark completed", e -> controller.handleCompleteAssignment(selectedId(assignmentTable)));
+        JButton cancel = button("Cancel", e -> controller.handleCancelAssignment(selectedId(assignmentTable)));
+        complete.setVisible(me == null);
+        cancel.setVisible(me == null);
         JPanel assignmentButtons = row(
                 button("Accept", e -> controller.handleRespondToAssignment(selectedId(assignmentTable), true)),
                 button("Decline", e -> controller.handleRespondToAssignment(selectedId(assignmentTable), false)),
-                button("Mark completed", e -> controller.handleCompleteAssignment(selectedId(assignmentTable))),
-                button("Cancel", e -> controller.handleCancelAssignment(selectedId(assignmentTable))),
+                complete, cancel,
                 new JLabel("      Log hours for selected assignment (VOL-07):  date"), hoursDateField,
                 new JLabel("hours"), hoursField,
                 button("Log hours", e -> controller.handleLogHours(selectedId(assignmentTable), hoursDateField.getText(), hoursField.getText())));
@@ -221,14 +235,14 @@ public class VolunteerPanel extends JPanel {
 
         JPanel bottom = new JPanel(new BorderLayout());
         bottom.add(scroll(hourTable, "Hour records — a coordinator approves or rejects them"), BorderLayout.CENTER);
-        bottom.add(row(button("Approve", e -> controller.handleApproveHours(selectedId(hourTable), true)),
+        if (me == null) bottom.add(row(button("Approve", e -> controller.handleApproveHours(selectedId(hourTable), true)),
                 button("Reject", e -> controller.handleApproveHours(selectedId(hourTable), false))), BorderLayout.SOUTH);
 
         JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, top, bottom);
         split.setResizeWeight(0.6);
 
         JPanel panel = new JPanel(new BorderLayout());
-        panel.add(assign, BorderLayout.NORTH);
+        if (me == null) panel.add(assign, BorderLayout.NORTH);
         panel.add(split, BorderLayout.CENTER);
         return panel;
     }
@@ -259,6 +273,9 @@ public class VolunteerPanel extends JPanel {
         return panel;
     }
 
+    @Override
+    public void databaseChanged() { refresh(); }
+
     public void refresh() {
         refreshing = true;
         try {
@@ -266,10 +283,11 @@ public class VolunteerPanel extends JPanel {
 
             volunteerModel.setRowCount(0);
             for (Volunteer v : controller.handleSearch(searchField.getText())) {
+                if (me != null && v.getUserId() != me) continue;
                 volunteerModel.addRow(new Object[]{v.getUserId(), v.getName(), v.getEmail(), v.getPhone(), v.getStatus(),
                         join(v.getSkills()), join(v.getAvailability()), v.getApprovedHours()});
             }
-            reselect(volunteerTable, selectedVolunteer);
+            reselect(volunteerTable, me != null ? me : selectedVolunteer);
 
             taskModel.setRowCount(0);
             for (VolunteerTask t : controller.getTasks()) {
@@ -282,6 +300,7 @@ public class VolunteerPanel extends JPanel {
             Integer selectedAssignment = selectedId(assignmentTable);
             assignmentModel.setRowCount(0);
             for (VolunteerAssignment a : controller.getAssignments()) {
+                if (me != null && a.getVolunteerId() != me) continue;
                 VolunteerTask t = controller.getTask(a.getTaskId());
                 assignmentModel.addRow(new Object[]{a.getAssignmentId(), controller.getVolunteer(a.getVolunteerId()).getName(),
                         t.getTitle(), DT.format(t.getStartTime()), a.getRole(), a.getStatus(), DT.format(a.getAssignedAt())});
@@ -290,13 +309,15 @@ public class VolunteerPanel extends JPanel {
 
             hourModel.setRowCount(0);
             for (VolunteerHourRecord r : controller.getHourRecords()) {
+                if (me != null && r.getVolunteerId() != me) continue;
                 hourModel.addRow(new Object[]{r.getRecordId(), r.getAssignmentId(), controller.getVolunteer(r.getVolunteerId()).getName(),
                         r.getDate(), r.getHours(), r.getApprovalStatus(), r.getApprovedById() == null ? "" : "user #" + r.getApprovedById()});
             }
 
             List<Volunteer> all = controller.getVolunteers();
             reloadCombo(assignVolunteerBox, all.stream().filter(Volunteer::isActive).collect(Collectors.toList()));
-            reloadCombo(historyVolunteerBox, all);
+            reloadCombo(historyVolunteerBox, me == null ? all
+                    : all.stream().filter(v -> v.getUserId() == me).collect(Collectors.toList()));
             reloadCombo(assignTaskBox, controller.getTasks().stream()
                     .filter(t -> t.getStatus() != volunteer.model.TaskStatus.CANCELLED
                             && t.getStatus() != volunteer.model.TaskStatus.COMPLETED)

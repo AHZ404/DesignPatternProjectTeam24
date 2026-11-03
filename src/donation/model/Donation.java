@@ -13,6 +13,8 @@ public class Donation implements Serializable {
     private String status;
     private IPaymentStrategy paymentStrategy;
 
+    private Donation() { } // for Jackson
+
     public Donation(int donationId, int donorId, double amount, Date donationDate, String status, IPaymentStrategy paymentStrategy) {
         this.donationId = donationId;
         this.donorId = donorId;

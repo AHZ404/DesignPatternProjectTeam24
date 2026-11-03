@@ -6,6 +6,7 @@ public final class ImpactRecord implements Serializable {
     private static final long serialVersionUID = 1L;
     private final int id, beneficiaryId;
     private final String outcome, notes, createdAt;
+    private ImpactRecord() { this(0, 0, null, null, null); } // for Jackson
     public ImpactRecord(int id, int beneficiaryId, String outcome, String notes, String createdAt) {
         this.id=id; this.beneficiaryId=beneficiaryId; this.outcome=outcome;
         this.notes=notes; this.createdAt=createdAt;

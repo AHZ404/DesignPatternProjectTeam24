@@ -1,5 +1,6 @@
 package donation.view;
 
+import database.DatabaseObserver;
 import donation.controller.DonationController;
 import donation.model.*;
 
@@ -10,17 +11,22 @@ import java.util.*;
 import java.util.List;
 
 /** MVC View for Donation Management matching BeneficiaryPanel design. */
-public final class DonationPanel extends JPanel {
+public final class DonationPanel extends JPanel implements DatabaseObserver {
     private final DonationController controller;
     private final JTable donorsTable = new JTable();
     private final JTable donationsTable = new JTable();
+    private final Integer donorId; // null = admin view (all donors), otherwise the logged-in donor
 
-    public DonationPanel(DonationController controller) {
+    public DonationPanel(DonationController controller) { this(controller, null); }
+
+    public DonationPanel(DonationController controller, Integer donorId) {
         super(new BorderLayout(8, 8)); // Valid because DonationPanel extends JPanel
         this.controller = Objects.requireNonNull(controller);
+        this.donorId = donorId;
         setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
-        JLabel title = new JLabel("Donation Management  |  Flexible Strategy & Automated Inventory");
+        JLabel title = new JLabel(donorId == null ? "Donation Management  |  Flexible Strategy & Automated Inventory"
+                : "My Donor Account  |  Profile, Donations, Receipts & Tax Statements");
         title.setFont(title.getFont().deriveFont(Font.BOLD, 18f));
         add(title, BorderLayout.NORTH);
 
@@ -101,6 +107,7 @@ public final class DonationPanel extends JPanel {
     }
 
     private Integer chooseDonor() {
+        if (donorId != null) return donorId;
         List<Donor> items = controller.listDonors();
         if (items.isEmpty()) throw new IllegalArgumentException("Register a donor first");
         Object selected = JOptionPane.showInputDialog(this, "Choose Donor", "Select Donor",
@@ -118,7 +125,7 @@ public final class DonationPanel extends JPanel {
         }));
 
         JButton editDonor = button("Edit Donor", () -> action(() -> {
-            int id = selectedId(donorsTable);
+            int id = (donorId != null ? donorId : selectedId(donorsTable));
             Donor existing = null;
             for (Donor d : controller.listDonors()) if (d.getDonorId() == id) existing = d;
             if (existing == null) throw new IllegalArgumentException("Donor not found");
@@ -128,19 +135,20 @@ public final class DonationPanel extends JPanel {
         }));
 
         JButton deleteDonor = button("Delete Donor", () -> action(() -> {
-            int id = selectedId(donorsTable);
+            int id = (donorId != null ? donorId : selectedId(donorsTable));
             if (JOptionPane.showConfirmDialog(this, "Delete donor #" + id + "?", "Confirm delete",
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                 controller.deleteDonor(id);
+                if (donorId != null) SwingUtilities.getWindowAncestor(this).dispose(); // own account deleted
             }
         }));
 
         JButton taxSummary = button("Tax Statement", () -> action(() -> {
-            int donorId = selectedId(donorsTable);
+            int taxDonorId = (donorId != null ? donorId : selectedId(donorsTable));
             String yearStr = JOptionPane.showInputDialog(this, "Enter Tax Year:", String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
             if (yearStr != null && !yearStr.isBlank()) {
                 int year = Integer.parseInt(yearStr.trim());
-                JTextArea text = new JTextArea(controller.generateTaxSummary(donorId, year), 18, 65);
+                JTextArea text = new JTextArea(controller.generateTaxSummary(taxDonorId, year), 18, 65);
                 text.setEditable(false);
                 text.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
                 JOptionPane.showMessageDialog(this, new JScrollPane(text), "Tax Deduction Statement", JOptionPane.INFORMATION_MESSAGE);
@@ -205,23 +213,35 @@ public final class DonationPanel extends JPanel {
             }
         }));
 
+        JPanel donorButtons = donorId == null
+                ? buttons("Registered Donors:", addDonor, editDonor, deleteDonor, taxSummary)
+                : buttons("My Profile:", editDonor, deleteDonor, taxSummary);
+        if (donorId != null) { editDonor.setText("Edit My Profile"); deleteDonor.setText("Delete My Account"); }
+        JPanel donationButtons = donorId == null
+                ? buttons("Donation Transactions:", addDonation, receipt, deleteDonation)
+                : buttons("My Donations:", addDonation, receipt);
         JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                withToolbar(pane(donorsTable), buttons("Registered Donors:", addDonor, editDonor, deleteDonor, taxSummary)),
-                withToolbar(pane(donationsTable), buttons("Donation Transactions:", addDonation, receipt, deleteDonation)));
+                withToolbar(pane(donorsTable), donorButtons),
+                withToolbar(pane(donationsTable), donationButtons));
         split.setResizeWeight(0.45);
         return split;
     }
+
+    @Override
+    public void databaseChanged() { refresh(); }
 
     public void refresh() {
         DefaultTableModel donorModel = (DefaultTableModel) donorsTable.getModel();
         donorModel.setRowCount(0);
         for (Donor d : controller.listDonors()) {
+            if (donorId != null && d.getDonorId() != donorId) continue;
             donorModel.addRow(new Object[]{d.getDonorId(), d.getName(), d.getEmail(), d.getPhone(), d.getTaxId()});
         }
 
         DefaultTableModel donationModel = (DefaultTableModel) donationsTable.getModel();
         donationModel.setRowCount(0);
         for (Donation d : controller.listDonations()) {
+            if (donorId != null && d.getDonorId() != donorId) continue;
             donationModel.addRow(new Object[]{
                     d.getDonationId(),
                     d.getDonorId(),
