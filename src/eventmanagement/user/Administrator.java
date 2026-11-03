@@ -1,6 +1,7 @@
-package eventmanagement;
+package eventmanagement.user;
 
 import java.util.Date;
+import eventmanagement.model.*;
 
 public class Administrator implements User {
     private static int nextEventId = 1;

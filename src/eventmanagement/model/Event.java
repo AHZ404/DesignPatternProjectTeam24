@@ -1,4 +1,4 @@
-package eventmanagement;
+package eventmanagement.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,7 +40,7 @@ public class Event {
         return confirmed < capacity;
     }
 
-    void addRegistration(EventRegistration r) { registrations.add(r); }
+    public void addRegistration(EventRegistration r) { registrations.add(r); }
     public List<EventRegistration> getRegistrations() { return registrations; }
 
     public int getEventId() { return eventId; }

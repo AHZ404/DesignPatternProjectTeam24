@@ -1,4 +1,7 @@
-package eventmanagement;
+package eventmanagement.view;
+
+import eventmanagement.model.*;
+import eventmanagement.observer.*;
 
 public class EventView implements EventObserver {
     private String title;

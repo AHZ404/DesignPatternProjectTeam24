@@ -1,4 +1,4 @@
-package eventmanagement;
+package eventmanagement.model;
 
 public class EventTicket {
     private final int ticketId;

@@ -1,7 +1,8 @@
-package eventmanagement;
+package eventmanagement.observer;
 
 import java.util.ArrayList;
 import java.util.List;
+import eventmanagement.model.*;
 
 public class EventObservable implements Subject {
     private final List<EventObserver> observers = new ArrayList<>();

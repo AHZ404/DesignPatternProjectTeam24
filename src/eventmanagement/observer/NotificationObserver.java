@@ -1,4 +1,6 @@
-package eventmanagement;
+package eventmanagement.observer;
+
+import eventmanagement.model.*;
 
 public class NotificationObserver implements EventObserver {
     private String eventTitle;

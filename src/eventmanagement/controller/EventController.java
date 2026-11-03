@@ -1,9 +1,13 @@
-package eventmanagement;
+package eventmanagement.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import eventmanagement.model.*;
+import eventmanagement.observer.*;
+import eventmanagement.user.*;
+import eventmanagement.view.*;
 
 public class EventController {
     private static int nextEventId = 1000;

@@ -1,6 +1,7 @@
-package eventmanagement;
+package eventmanagement.model;
 
 import java.util.Date;
+import eventmanagement.user.*;
 
 public class EventRegistration {
     private final int registrationId;
@@ -41,7 +42,7 @@ public class EventRegistration {
         return ticket;
     }
 
-    void setAttendanceRecord(AttendanceRecord record) { this.attendanceRecord = record; }
+    public void setAttendanceRecord(AttendanceRecord record) { this.attendanceRecord = record; }
 
     public int getRegistrationId() { return registrationId; }
     public Date getRegistrationDate() { return registrationDate; }

@@ -1,8 +1,9 @@
-package eventmanagement;
+package eventmanagement.user;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import eventmanagement.model.*;
 
 public class Attendee implements User {
     private static int nextRegistrationId = 1;

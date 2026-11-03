@@ -1,5 +1,9 @@
 package eventmanagement;
 
+import eventmanagement.controller.*;
+import eventmanagement.model.*;
+import eventmanagement.user.*;
+
 public class Main {
     public static void main(String[] args) {
         Administrator admin = new Administrator(1, "Admin", "admin@ngo.org");

@@ -1,4 +1,4 @@
-package eventmanagement;
+package eventmanagement.user;
 
 public interface User {
     String getName();

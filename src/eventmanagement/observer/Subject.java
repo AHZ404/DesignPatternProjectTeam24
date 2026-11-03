@@ -1,4 +1,4 @@
-package eventmanagement;
+package eventmanagement.observer;
 
 public interface Subject {
     void registerObserver(EventObserver o);
