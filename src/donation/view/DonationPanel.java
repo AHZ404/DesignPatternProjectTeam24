@@ -194,6 +194,13 @@ public final class DonationPanel extends JPanel implements DatabaseObserver {
                 strategy = new InKindPayment(x[0], x[1], Integer.parseInt(x[2]));
             }
 
+            // Decorator: optionally add "donor covers the processing fee" to card payments only
+            if ((strategy instanceof CreditCardPayment || strategy instanceof DebitCardPayment) && JOptionPane.showConfirmDialog(this,
+                    String.format("Also cover the 3%% processing fee ($%.2f)?", amount * FeeCoveredPayment.FEE_RATE),
+                    "Cover Fee", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                strategy = new FeeCoveredPayment(strategy);
+            }
+
             controller.recordDonation(donorId, amount, strategy);
         }));
 
