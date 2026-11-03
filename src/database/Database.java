@@ -2,6 +2,11 @@ package database;
 
 import beneficiary.model.*;
 import donation.model.*;
+import volunteer.model.Volunteer;
+import volunteer.model.VolunteerAssignment;
+import volunteer.model.VolunteerCertificate;
+import volunteer.model.VolunteerHourRecord;
+import volunteer.model.VolunteerTask;
 import java.io.Serializable;
 import java.util.*;
 
@@ -27,6 +32,12 @@ public class Database implements Serializable {
     // Donation Module
     public Map<Integer, Donor> donors = new LinkedHashMap<>();
     public Map<Integer, Donation> donations = new LinkedHashMap<>();
+
+    public Map<Integer, Volunteer> volunteers = new LinkedHashMap<>();
+    public Map<Integer, VolunteerTask> volunteerTasks = new LinkedHashMap<>();
+    public Map<Integer, VolunteerAssignment> volunteerAssignments = new LinkedHashMap<>();
+    public Map<Integer, VolunteerHourRecord> volunteerHours = new LinkedHashMap<>();
+    public Map<Integer, VolunteerCertificate> volunteerCertificates = new LinkedHashMap<>();
 
     public Database() { }
 }
