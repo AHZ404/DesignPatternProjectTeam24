@@ -1,6 +1,6 @@
 # Non-Profit Organization Management System
 
-A Java Swing desktop application designed for non-profit organizations to manage **Beneficiary Assistance**, **Donations**, and **Resource Inventory**. The system features full CRUD operations, automated inventory synchronization from donations, payment strategy implementations, and local persistence powered by a thread-safe JSON object store.
+A Java Swing desktop application designed for non-profit organizations to manage **Beneficiary Assistance**, **Donations**, **Volunteers**, and **Resource Inventory**. The system features full CRUD operations, automated inventory synchronization from donations, payment strategy implementations, and local persistence powered by a thread-safe JSON object store.
 
 ---
 
@@ -10,7 +10,7 @@ A Java Swing desktop application designed for non-profit organizations to manage
 - **GUI Framework:** Java Swing (`JFrame`, `JTabbedPane`, `JSplitPane`, `JTable`)
 - **Persistence:** Local JSON file storage via Jackson (`jackson-databind`)
 - **Architecture:** Model-View-Controller (MVC) Pattern
-- **Design Patterns:** Strategy Pattern (Payment Processing), Singleton Pattern (Inventory Management), Thread-Safe Repository Pattern
+- **Design Patterns:** Strategy Pattern (Payment Processing), Singleton Pattern (Inventory Management), Factory Pattern (Volunteer Tasks), Thread-Safe Repository Pattern
 
 ---
 
@@ -20,7 +20,8 @@ A Java Swing desktop application designed for non-profit organizations to manage
 src/
 ├── database/                   # Central Persistence Layer
 │   ├── Database.java           # In-memory data store containing all domain maps & ID counters
-│   └── JsonRepository.java     # Thread-safe read/write coordinator for database.json
+│   ├── JsonRepository.java     # Thread-safe read/write coordinator for database.json
+│   └── JavaTimeJsonModule.java # Saves LocalDate / LocalTime / LocalDateTime as text (no extra library)
 ├── beneficiary/                # Beneficiary & Inventory Module
 │   ├── controller/
 │   │   └── BeneficiaryController.java
@@ -54,6 +55,25 @@ src/
 │   │   └── DonationService.java
 │   └── view/
 │       └── DonationPanel.java
+├── volunteer/                  # Volunteer Module (Factory Pattern)
+│   ├── VolunteerDemo.java      # Runs the module alone (window, or --console rule checks)
+│   ├── controller/
+│   │   └── VolunteerController.java
+│   ├── model/
+│   │   ├── Volunteer.java, Skill.java, AvailabilitySlot.java
+│   │   ├── VolunteerTask.java (abstract), FundraiserTask.java, WorkshopTask.java, OutreachTask.java
+│   │   ├── VolunteerAssignment.java, VolunteerHourRecord.java, VolunteerCertificate.java
+│   │   └── TaskType, TaskStatus, AssignmentStatus, ApprovalStatus, VolunteerStatus, SkillLevel, CertificateType
+│   ├── service/
+│   │   ├── VolunteerTaskFactory.java      # Factory Pattern
+│   │   ├── VolunteerService.java
+│   │   ├── VolunteerRepository.java       # storage interface
+│   │   ├── JsonVolunteerRepository.java   # saves to data/database.json
+│   │   ├── InMemoryVolunteerRepository.java
+│   │   └── VolunteerNotifier.java, ConsoleVolunteerNotifier.java
+│   └── view/
+│       └── VolunteerPanel.java
+├── user/model/                 # Placeholder User / EventCoordinator until the User module is added
 └── Main.java                   # Application entry point & shared repository wiring
 
 ```
@@ -64,7 +84,8 @@ All application data is centralized inside a single file located at `data/databa
 
 ### 1. Centralized ID Sequence
 Human user profiles share a unified sequential counter (`nextUserId`) to ensure clean sequential identification:
-- **Donors & Beneficiaries:** Shared `nextUserId` counter (IDs: 1, 2, 3, 4...).
+- **Donors, Beneficiaries & Volunteers:** Shared `nextUserId` counter (IDs: 1, 2, 3, 4...).
+- **Volunteer records** (skills, availability slots, tasks, assignments, hours, certificates) use `nextId`.
 - **Transactions & Inventory:** `nextId` and `nextDonationId` manage internal inventory allocations and donation records.
 
 ### 2. Automated Inventory Integration
@@ -132,3 +153,11 @@ If using **Maven** (`pom.xml`), ensure `jackson-databind` is included:
 - **Inventory & Aid Distribution:** Deduct resources from inventory to fulfill active assistance requests.
 - **Services & Impact Tracking:** Record delivered program outcomes and generate historical impact summaries.
 - **CRUD Matrix View:** Inspect module requirements mapped against system entities.
+
+### 3. Volunteer Management Tab
+- **Volunteers:** Register, update, search (name, email, phone, skill) and deactivate volunteers; manage skills and weekly availability.
+- **Tasks:** Create Fundraiser, Workshop and Outreach tasks through `VolunteerTaskFactory`, optionally linked to an event.
+- **Assignments & Hours:** Assign volunteers only when they have the required skills, are available and have no overlapping task; volunteers accept or decline; hours are logged and approved by a coordinator (never by the volunteer).
+- **History & Certificates:** View each volunteer's assignments and approved hours; issue participation or hours-milestone certificates.
+- Run the module's 30 business-rule checks without the GUI: `java -cp "out:libs/*" volunteer.VolunteerDemo --console`
+
