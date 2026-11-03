@@ -2,6 +2,7 @@ package beneficiary.view;
 
 import beneficiary.controller.BeneficiaryController;
 import beneficiary.model.*;
+import database.DatabaseObserver;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,26 +10,33 @@ import java.util.*;
 import java.util.List;
 
 /** MVC View. All actions call the controller, never the repository. */
-public final class BeneficiaryPanel extends JPanel {
+public final class BeneficiaryPanel extends JPanel implements DatabaseObserver {
     private final BeneficiaryController controller;
     private final JTable beneficiaries=new JTable(), needs=new JTable(), requests=new JTable();
     private final JTable resources=new JTable(), distributions=new JTable();
     private final JTable services=new JTable(), impacts=new JTable();
     private final JTextField search=new JTextField(23);
+    private final Integer me; // null = admin view, otherwise the logged-in beneficiary
 
-    public BeneficiaryPanel(BeneficiaryController controller) {
+    public BeneficiaryPanel(BeneficiaryController controller) { this(controller,null); }
+
+    public BeneficiaryPanel(BeneficiaryController controller,Integer beneficiaryId) {
         super(new BorderLayout(8,8));
         this.controller=Objects.requireNonNull(controller);
+        this.me=beneficiaryId;
         setBorder(BorderFactory.createEmptyBorder(12,12,12,12));
-        JLabel title=new JLabel("Beneficiary Management  |  Singleton Inventory Manager");
+        JLabel title=new JLabel(me==null ? "Beneficiary Management  |  Singleton Inventory Manager"
+                : "My Beneficiary Account  |  Profile, Needs & Requests");
         title.setFont(title.getFont().deriveFont(Font.BOLD,18f));
         add(title,BorderLayout.NORTH);
         JTabbedPane tabs=new JTabbedPane();
-        tabs.addTab("Beneficiaries",beneficiariesTab());
+        tabs.addTab(me==null ? "Beneficiaries" : "My Profile",beneficiariesTab());
         tabs.addTab("Needs & Requests",needsTab());
-        tabs.addTab("Inventory & Aid",inventoryTab());
-        tabs.addTab("Services & Impact",servicesTab());
-        tabs.addTab("CRUD Matrix",crudMatrixTab());
+        if (me==null) {
+            tabs.addTab("Inventory & Aid",inventoryTab());
+            tabs.addTab("Services & Impact",servicesTab());
+            tabs.addTab("CRUD Matrix",crudMatrixTab());
+        }
         add(tabs,BorderLayout.CENTER);
         refresh();
     }
@@ -63,6 +71,7 @@ public final class BeneficiaryPanel extends JPanel {
         }
     }
     private int selectedId(JTable table) {
+        if (me!=null && table==beneficiaries) return me;
         int viewRow=table.getSelectedRow();
         if (viewRow<0) throw new IllegalArgumentException("Select a row first");
         return (Integer)table.getModel().getValueAt(table.convertRowIndexToModel(viewRow),0);
@@ -86,6 +95,7 @@ public final class BeneficiaryPanel extends JPanel {
         return values;
     }
     private Integer chooseBeneficiary() {
+        if (me!=null) return me;
         List<Beneficiary> items=controller.listBeneficiaries("");
         if (items.isEmpty()) throw new IllegalArgumentException("Register a beneficiary first");
         Object selected=JOptionPane.showInputDialog(this,"Choose beneficiary","Beneficiary",
@@ -130,7 +140,7 @@ public final class BeneficiaryPanel extends JPanel {
             int id=selectedId(beneficiaries);
             if (JOptionPane.showConfirmDialog(this,"Delete beneficiary #"+id+"?","Confirm delete",
                     JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)==JOptionPane.YES_OPTION)
-                controller.deleteBeneficiary(id);
+            { controller.deleteBeneficiary(id); if (me!=null) SwingUtilities.getWindowAncestor(this).dispose(); }
         }));
         JButton history=button("View History",()->action(()->{
             int id=selectedId(beneficiaries);
@@ -142,8 +152,9 @@ public final class BeneficiaryPanel extends JPanel {
         JPanel query=new JPanel(new FlowLayout(FlowLayout.LEFT));
         query.add(new JLabel("Search by name, ID, or contact:"));
         query.add(search); query.add(find); query.add(clear);
-        top.add(query,BorderLayout.NORTH);
-        top.add(buttons("",add,edit,delete,status,history),BorderLayout.SOUTH);
+        if (me==null) top.add(query,BorderLayout.NORTH);
+        else { edit.setText("Edit My Profile"); delete.setText("Delete My Account"); }
+        top.add(me==null ? buttons("",add,edit,delete,status,history) : buttons("",edit,delete,history),BorderLayout.SOUTH);
         return withToolbar(pane(beneficiaries),top);
     }
     private JPanel needsTab() {
@@ -266,12 +277,14 @@ public final class BeneficiaryPanel extends JPanel {
         panel.add(notes,BorderLayout.SOUTH);
         return panel;
     }
+    @Override public void databaseChanged() { refresh(); }
+
     public void refresh() {
         refreshBeneficiaries();
         DefaultTableModel n=(DefaultTableModel)needs.getModel();n.setRowCount(0);
-        for (NeedAssessment a:controller.listNeeds())n.addRow(new Object[]{a.getId(),a.getBeneficiaryId(),a.getResourceNeeds(),a.getServiceNeeds(),a.getNotes(),a.getCreatedAt()});
+        for (NeedAssessment a:controller.listNeeds())if(me==null||a.getBeneficiaryId()==me)n.addRow(new Object[]{a.getId(),a.getBeneficiaryId(),a.getResourceNeeds(),a.getServiceNeeds(),a.getNotes(),a.getCreatedAt()});
         DefaultTableModel q=(DefaultTableModel)requests.getModel();q.setRowCount(0);
-        for (AssistanceRequest r:controller.listRequests())q.addRow(new Object[]{r.getId(),r.getBeneficiaryId(),r.getType(),r.getDescription(),
+        for (AssistanceRequest r:controller.listRequests())if(me==null||r.getBeneficiaryId()==me)q.addRow(new Object[]{r.getId(),r.getBeneficiaryId(),r.getType(),r.getDescription(),
                 r.getResourceId()==0?"—":r.getResourceId(),r.getQuantity(),r.getFulfilledQuantity(),r.getStatus()});
         DefaultTableModel stock=(DefaultTableModel)resources.getModel();stock.setRowCount(0);
         for(Resource r:controller.listResources())stock.addRow(new Object[]{r.getId(),r.getName(),r.getCategory(),r.getStock()});
@@ -285,6 +298,6 @@ public final class BeneficiaryPanel extends JPanel {
     private void refreshBeneficiaries() {
         DefaultTableModel m=(DefaultTableModel)beneficiaries.getModel();m.setRowCount(0);
         for (Beneficiary b:controller.listBeneficiaries(search.getText()))
-            m.addRow(new Object[]{b.getId(),b.getName(),b.getContact(),b.getAddress(),b.getStatus()});
+            if (me==null || b.getId()==me) m.addRow(new Object[]{b.getId(),b.getName(),b.getContact(),b.getAddress(),b.getStatus()});
     }
 }

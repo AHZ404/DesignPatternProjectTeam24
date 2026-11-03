@@ -11,6 +11,7 @@ public final class AssistanceRequest implements Serializable {
     private final String description, createdAt;
     private final Status status;
 
+    private AssistanceRequest() { this(0, 0, null, 0, 0, 0, null, null, null); } // for Jackson
     public AssistanceRequest(int id, int beneficiaryId, Type type, int resourceId, int quantity,
             int fulfilledQuantity, String description, Status status, String createdAt) {
         this.id=id; this.beneficiaryId=beneficiaryId; this.type=type; this.resourceId=resourceId;

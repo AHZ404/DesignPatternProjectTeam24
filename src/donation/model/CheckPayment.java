@@ -5,6 +5,8 @@ public class CheckPayment implements IPaymentStrategy {
     private String checkNumber;
     private String bankName;
 
+    private CheckPayment() { } // for Jackson
+
     public CheckPayment(String checkNumber, String bankName) {
         this.checkNumber = checkNumber;
         this.bankName = bankName;

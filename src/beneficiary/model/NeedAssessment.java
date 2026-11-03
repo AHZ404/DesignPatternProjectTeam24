@@ -6,6 +6,7 @@ public final class NeedAssessment implements Serializable {
     private static final long serialVersionUID = 1L;
     private final int id, beneficiaryId;
     private final String resourceNeeds, serviceNeeds, notes, createdAt;
+    private NeedAssessment() { this(0, 0, null, null, null, null); } // for Jackson
     public NeedAssessment(int id, int beneficiaryId, String resourceNeeds, String serviceNeeds, String notes, String createdAt) {
         this.id=id; this.beneficiaryId=beneficiaryId; this.resourceNeeds=resourceNeeds;
         this.serviceNeeds=serviceNeeds; this.notes=notes; this.createdAt=createdAt;

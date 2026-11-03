@@ -6,6 +6,8 @@ public class InKindPayment implements IPaymentStrategy {
     private String itemCategory;
     private int unitQuantity;
 
+    private InKindPayment() { } // for Jackson
+
     public InKindPayment(String itemName, String itemCategory, int unitQuantity) {
         this.itemName = itemName;
         this.itemCategory = itemCategory;

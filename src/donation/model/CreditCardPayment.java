@@ -4,6 +4,8 @@ public class CreditCardPayment implements IPaymentStrategy {
     private static final long serialVersionUID = 1L;
     private String transactionId;
 
+    private CreditCardPayment() { } // for Jackson
+
     public CreditCardPayment(String transactionId) {
         this.transactionId = transactionId;
     }

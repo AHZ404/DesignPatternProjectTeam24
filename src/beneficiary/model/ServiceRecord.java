@@ -6,6 +6,7 @@ public final class ServiceRecord implements Serializable {
     private static final long serialVersionUID = 1L;
     private final int id, beneficiaryId, requestId;
     private final String serviceName, notes, createdAt;
+    private ServiceRecord() { this(0, 0, 0, null, null, null); } // for Jackson
     public ServiceRecord(int id, int beneficiaryId, int requestId, String serviceName, String notes, String createdAt) {
         this.id=id; this.beneficiaryId=beneficiaryId; this.requestId=requestId;
         this.serviceName=serviceName; this.notes=notes; this.createdAt=createdAt;
