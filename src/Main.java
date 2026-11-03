@@ -9,6 +9,15 @@ import donation.model.*;
 import donation.service.DonationService;
 import donation.view.DonationPanel;
 
+import user.model.EventCoordinator;
+
+import volunteer.controller.VolunteerController;
+import volunteer.service.ConsoleVolunteerNotifier;
+import volunteer.service.JsonVolunteerRepository;
+import volunteer.service.VolunteerService;
+import volunteer.service.VolunteerTaskFactory;
+import volunteer.view.VolunteerPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Paths;
@@ -51,8 +60,14 @@ public class Main {
                 DonationService donationService = new DonationService(jsonDb);
                 DonationController donationController = new DonationController(donationService);
 
+                EventCoordinator currentCoordinator = new EventCoordinator(0, "Event Coordinator", "coordinator@ngo.org", "");
+                VolunteerService volunteerService = new VolunteerService(
+                        new JsonVolunteerRepository(jsonDb), new VolunteerTaskFactory(), new ConsoleVolunteerNotifier());
+                VolunteerController volunteerController = new VolunteerController(volunteerService, currentCoordinator);
+
                 DonationPanel donationPanel = new DonationPanel(donationController);
                 BeneficiaryPanel beneficiaryPanel = new BeneficiaryPanel(beneficiaryController);
+                VolunteerPanel volunteerPanel = new VolunteerPanel(volunteerController);
 
                 // Re-sync UI state when tabs are toggled
                 tabs.addChangeListener(e -> {
@@ -60,11 +75,14 @@ public class Main {
                         beneficiaryPanel.refresh();
                     } else if (tabs.getSelectedComponent() == donationPanel) {
                         donationPanel.refresh();
+                    } else if (tabs.getSelectedComponent() == volunteerPanel) {
+                        volunteerPanel.refresh();
                     }
                 });
 
                 tabs.addTab("Donation Management", donationPanel);
                 tabs.addTab("Beneficiary Management", beneficiaryPanel);
+                tabs.addTab("Volunteer Management", volunteerPanel);
 
             } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(window, "Cannot load JSON database: " + ex.getMessage(),
