@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Design Patterns by Module" id="patterns">
-    <mxGraphModel dx="1893" dy="1357" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1654" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1288" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1654" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -84,8 +84,8 @@
           <mxGeometry height="150" width="290" x="760" y="50" as="geometry" />
         </mxCell>
         <mxCell id="e4" edge="1" parent="B" source="JsonRepository_f" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;startArrow=diamondThin;startFill=0;startSize=16;endArrow=open;endFill=0;endSize=10;exitX=1;exitY=0.059;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" target="DatabaseObserver" value="observers  0..*">
-          <mxGeometry relative="1" x="-0.0687" y="-11" as="geometry">
-            <mxPoint x="-11" y="11" as="offset" />
+          <mxGeometry relative="1" x="0.0001" y="-13" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="e3" edge="1" parent="1" source="JsonRepository" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;startArrow=diamondThin;startFill=1;startSize=16;endArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Database" value="1">
@@ -177,7 +177,7 @@
           <mxGeometry height="30" width="230" y="75" as="geometry" />
         </mxCell>
         <mxCell id="nC" parent="C" style="shape=note;html=1;whiteSpace=wrap;size=12;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontSize=12;fillColor=#fff9db;strokeColor=#c9a227;fontFamily=Helvetica;fontColor=#1a1a1a;" value="&lt;b&gt;Strategy&lt;/b&gt;: a Donation hands the payment to whichever IPaymentStrategy the donor picks.&lt;br&gt;&lt;b&gt;Decorator&lt;/b&gt;: for card payments, FeeCoveredPayment wraps the chosen payment and adds a 3% fee without changing any payment class." vertex="1">
-          <mxGeometry height="90" width="640" x="300" y="360" as="geometry" />
+          <mxGeometry height="90" width="640" x="410" y="447.5" as="geometry" />
         </mxCell>
         <mxCell id="e6" edge="1" parent="1" source="DonationPanel" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=open;endFill=0;endSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="DonationController" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -261,8 +261,8 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="-30" y="667" />
-              <mxPoint x="-30" y="520" />
-              <mxPoint x="1225" y="520" />
+              <mxPoint x="-30" y="540" />
+              <mxPoint x="1225" y="540" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -336,7 +336,7 @@
           <mxGeometry height="30" width="280" y="44" as="geometry" />
         </mxCell>
         <mxCell id="VolunteerTask" parent="E" style="swimlane;shape=swimlane;html=1;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=44;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=13;fillColor=#ffffff;swimlaneFillColor=#ffffff;strokeColor=#4d4d4d;fontFamily=Helvetica;fontColor=#1a1a1a;rounded=1;roundedPerimeter=1;" value="&lt;span style=&quot;font-size:11px;font-weight:normal&quot;&gt;«abstract» «Product»&lt;/span&gt;&lt;br&gt;&lt;b&gt;&lt;i&gt;VolunteerTask&lt;/i&gt;&lt;/b&gt;" vertex="1">
-          <mxGeometry height="145" width="240" x="720" y="50" as="geometry" />
+          <mxGeometry height="145" width="240" x="780" y="50" as="geometry" />
         </mxCell>
         <mxCell id="VolunteerTask_f" parent="VolunteerTask" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;spacingTop=0;fontSize=12;whiteSpace=wrap;fontFamily=Helvetica;fontColor=#1a1a1a;" value="# title : String&lt;br&gt;# startTime, endTime" vertex="1">
           <mxGeometry height="50" width="240" y="44" as="geometry" />
@@ -371,6 +371,15 @@
         <mxCell id="nE" parent="E" style="shape=note;html=1;whiteSpace=wrap;size=12;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontSize=12;fillColor=#fff9db;strokeColor=#c9a227;fontFamily=Helvetica;fontColor=#1a1a1a;" value="&lt;b&gt;Factory&lt;/b&gt;: VolunteerService asks the factory for a task by type and gets a Fundraiser, Workshop or Outreach task.&lt;br&gt;&lt;br&gt;&lt;b&gt;Repository&lt;/b&gt;: the service only knows the VolunteerRepository interface, not how data is stored." vertex="1">
           <mxGeometry height="120" width="330" x="1020" y="400" as="geometry" />
         </mxCell>
+        <mxCell id="e29" edge="1" parent="E" source="OutreachTask" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=block;endFill=0;endSize=12;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.499;entryY=1.007;entryDx=0;entryDy=0;entryPerimeter=0;" target="VolunteerTask_m" value="">
+          <mxGeometry relative="1" x="0.4754" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="234" />
+              <mxPoint x="899.8" y="234" />
+            </Array>
+            <mxPoint x="900" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="e22" edge="1" parent="1" source="VolunteerPanel" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=open;endFill=0;endSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VolunteerController" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -399,28 +408,15 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="e27" edge="1" parent="1" source="FundraiserTask" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=block;endFill=0;endSize=12;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="VolunteerTask" value="">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry relative="1" x="0.0039" as="geometry">
             <Array as="points">
               <mxPoint x="740" y="1424" />
-              <mxPoint x="840" y="1424" />
+              <mxPoint x="900" y="1424" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="e28" edge="1" parent="1" source="WorkshopTask" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=block;endFill=0;endSize=12;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="VolunteerTask" value="">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="900" y="1424" />
-              <mxPoint x="840" y="1424" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e29" edge="1" parent="1" source="OutreachTask" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=block;endFill=0;endSize=12;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="VolunteerTask" value="">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1060" y="1424" />
-              <mxPoint x="840" y="1424" />
-            </Array>
-          </mxGeometry>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e30" edge="1" parent="1" source="JsonVolunteerRepository" style="html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#4d4d4d;strokeWidth=1.3;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;fontColor=#1a1a1a;endArrow=block;endFill=0;endSize=12;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="VolunteerRepository" value="">
           <mxGeometry relative="1" as="geometry">
