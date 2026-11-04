@@ -1,0 +1,895 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cd" name="Class Diagram ">
+    <mxGraphModel dx="2165" dy="1007" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="6302" pageHeight="2406" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cluster_0" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#EEF2F7;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="MVC — Views (Observers) &amp; Controllers" vertex="1">
+          <mxGeometry height="382" width="1686" x="1690" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_1" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#F3EEF8;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Application &amp; Users  (login, one window per role)" vertex="1">
+          <mxGeometry height="623" width="434" x="4742" y="1548" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_2" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#EAF5EE;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Donation Management  (Strategy + Decorator)" vertex="1">
+          <mxGeometry height="1166" width="1561" x="50" y="1019" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_3" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#FDF3E6;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Volunteer Management  (Factory + Repository)" vertex="1">
+          <mxGeometry height="1939" width="1013" x="2995" y="459" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_4" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#FBEDEE;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Beneficiary Management  (CRUD Matrix)" vertex="1">
+          <mxGeometry height="1020" width="1069" x="1790" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_5" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#E9F2FB;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Database  (Singleton + Observer subject)" vertex="1">
+          <mxGeometry height="579" width="701" x="2146" y="1756" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_6" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#EAF4F4;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Event Management  (Observer)  —  designed, coded in the next phase" vertex="1">
+          <mxGeometry height="1972" width="815" x="5184" y="478" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_7" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#F4F1E6;strokeColor=#999999;verticalAlign=top;align=center;fontStyle=1;fontSize=15;dashed=0;" value="Communication Module  (Strategy)  —  designed, coded in the next phase" vertex="1">
+          <mxGeometry height="621" width="718" x="4016" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="c_DonationPanel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«View» «Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;DonationPanel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-donorId: Integer  (null = admin)&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+databaseChanged(): void&lt;br/&gt;+refresh(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="103" width="207" x="1722" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c_BeneficiaryPanel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«View» «Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;BeneficiaryPanel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-me: Integer  (null = admin)&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+databaseChanged(): void&lt;br/&gt;+refresh(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="103" width="180" x="2099" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerPanel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«View» «Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;VolunteerPanel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-volunteerId: Integer  (null = admin)&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+databaseChanged(): void&lt;br/&gt;+refresh(): void&lt;br/&gt;+showMessage(text) / showError(text)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="123" width="241" x="2371" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="c_DonationController" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Controller»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;DonationController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-donationService: DonationService&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+addDonor(...) / updateDonor(...) / deleteDonor(id)&lt;br/&gt;+recordDonation(donorId, amount, strategy): Donation&lt;br/&gt;+generateReceipt(id) / generateTaxSummary(id, year)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="129" width="343" x="1703" y="281" as="geometry" />
+        </mxCell>
+        <mxCell id="c_BeneficiaryController" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Controller»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;BeneficiaryController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-service: BeneficiaryService&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+register(...) / update(...) / deleteBeneficiary(id)&lt;br/&gt;+requestResource(...) / distribute(...)&lt;br/&gt;+addResource(...) / restock(...)&lt;br/&gt;+crudMatrix(): List&amp;lt;Row&amp;gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="298" x="2078" y="274" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerController" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Controller»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;VolunteerController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-service: VolunteerService&lt;br/&gt;-currentUser: User&lt;br/&gt;-view: VolunteerPanel&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+handleRegister(...) / handleUpdateProfile(...)&lt;br/&gt;+handleCreateTask(type, ...)&lt;br/&gt;+handleAssignTask(v, task, role)&lt;br/&gt;+handleLogHours(...) / handleApproveHours(...)&lt;br/&gt;+handleIssueCertificate(v, type)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="176" width="297" x="2408" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventPanel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«View» «Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;EventPanel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+databaseChanged(): void&lt;br/&gt;+refresh(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="103" width="172" x="2849" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventController" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Controller»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;EventController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-service: EventService&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+createEvent(...) / updateEvent(...) / cancelEvent(id)&lt;br/&gt;+registerAttendee(eventId, userId)&lt;br/&gt;+checkIn(ticketCode)&lt;br/&gt;+sendReminder(eventId)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="325" x="2749" y="274" as="geometry" />
+        </mxCell>
+        <mxCell id="c_CommunicationPanel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«View»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;CommunicationPanel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+refresh(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="96" width="154" x="3151" y="97" as="geometry" />
+        </mxCell>
+        <mxCell id="c_CommunicationController" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Controller»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;CommunicationController&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-service: NotificationService&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+sendAnnouncement(group, subject, text)&lt;br/&gt;+listHistory(): List&amp;lt;Message&amp;gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="113" width="267" x="3095" y="287" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Main" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Main&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-ADMIN_PASSWORD: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+main(args)&lt;br/&gt;-showLogin()&lt;br/&gt;-openWindow(role, id, who)&lt;br/&gt;-observe(window, screens)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="119" width="175" x="4868" y="1587" as="geometry" />
+        </mxCell>
+        <mxCell id="c_User" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«abstract»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;&lt;i&gt;User&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;#userId: int&lt;br/&gt;#name: String&lt;br/&gt;#email: String&lt;br/&gt;#phone: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+updateProfile(name, email, phone)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="230" x="4774" y="1822" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventCoordinator" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;EventCoordinator&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;(admin / coordinator user)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="71" width="169" x="4895" y="2086" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Donor" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Donor&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-donorId: int&lt;br/&gt;-name: String&lt;br/&gt;-email: String&lt;br/&gt;-phone: String&lt;br/&gt;-taxId: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="123" width="97" x="919" y="1096" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Donation" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Context»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;Donation&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-donationId: int&lt;br/&gt;-donorId: int&lt;br/&gt;-amount: double&lt;br/&gt;-donationDate: Date&lt;br/&gt;-status: String&lt;br/&gt;-paymentStrategy: IPaymentStrategy&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+setPaymentStrategy(s: IPaymentStrategy)&lt;br/&gt;+processDonation(): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="176" width="274" x="935" y="1350" as="geometry" />
+        </mxCell>
+        <mxCell id="c_IPaymentStrategy" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface» «Strategy»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;IPaymentStrategy&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount: double): boolean&lt;br/&gt;+getMethodName(): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="107" width="279" x="721" y="1601" as="geometry" />
+        </mxCell>
+        <mxCell id="c_CashPayment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CashPayment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="81" width="231" x="67" y="1853" as="geometry" />
+        </mxCell>
+        <mxCell id="c_CreditCardPayment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CreditCardPayment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-transactionId: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="81" width="231" x="319" y="1725" as="geometry" />
+        </mxCell>
+        <mxCell id="c_DebitCardPayment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DebitCardPayment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-transactionId: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="81" width="231" x="956.5" y="1796" as="geometry" />
+        </mxCell>
+        <mxCell id="c_InKindPayment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;InKindPayment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-itemName: String&lt;br/&gt;-itemCategory: String&lt;br/&gt;-unitQuantity: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(value): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="107" width="217" x="1381" y="1840" as="geometry" />
+        </mxCell>
+        <mxCell id="c_PaymentDecorator" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«abstract» «Decorator»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;PaymentDecorator&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;#wrapped: IPaymentStrategy&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount): boolean&lt;br/&gt;+getMethodName(): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="107" width="231" x="593" y="1936" as="geometry" />
+        </mxCell>
+        <mxCell id="c_FeeCoveredPayment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Concrete Decorator»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;FeeCoveredPayment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+FEE_RATE: double = 0.03&lt;/u&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount): boolean&lt;br/&gt;+getMethodName(): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="107" width="231" x="593" y="2081" as="geometry" />
+        </mxCell>
+        <mxCell id="c_DonationService" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Service»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;DonationService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-repository: JsonRepository&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+addDonor(...) / updateDonor(...) / deleteDonor(id)&lt;br/&gt;+recordDonation(donorId, amount, strategy): Donation&lt;br/&gt;+deleteDonation(id)&lt;br/&gt;+generateReceipt(id): String&lt;br/&gt;+generateTaxSummary(donorId, year): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="159" width="343" x="1252" y="1061" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Volunteer" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Volunteer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-preferences: List&amp;lt;String&amp;gt;&lt;br/&gt;-status: VolunteerStatus&lt;br/&gt;-skills: List&amp;lt;Skill&amp;gt;&lt;br/&gt;-availability: List&amp;lt;AvailabilitySlot&amp;gt;&lt;br/&gt;-approvedHours: double&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+addSkill(s) / removeSkill(id)&lt;br/&gt;+hasSkill(name): boolean&lt;br/&gt;+addAvailability(slot)&lt;br/&gt;+isAvailable(start, end): boolean&lt;br/&gt;+activate() / deactivate()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="175" width="212" x="3630" y="2014" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Skill" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Skill&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-skillId: int&lt;br/&gt;-name: String&lt;br/&gt;-level: SkillLevel&lt;br/&gt;-certified: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+matches(name): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="119" width="173" x="3819" y="2250" as="geometry" />
+        </mxCell>
+        <mxCell id="c_AvailabilitySlot" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AvailabilitySlot&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-slotId: int&lt;br/&gt;-day: DayOfWeek&lt;br/&gt;-startTime, endTime: LocalTime&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+covers(start, end): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="202" x="3330" y="2210" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerTask" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«abstract»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;&lt;i&gt;VolunteerTask&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;#taskId: int&lt;br/&gt;#title: String&lt;br/&gt;#startTime, endTime: LocalDateTime&lt;br/&gt;#requiredSkills: List&amp;lt;String&amp;gt;&lt;br/&gt;#maxVolunteers: int&lt;br/&gt;#status: TaskStatus&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+overlaps(other): boolean&lt;br/&gt;+isFull(): boolean&lt;br/&gt;+getType(): TaskType&lt;br/&gt;+execute(): void&lt;br/&gt;+getTypeDetails(): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="224" width="235" x="3595" y="994" as="geometry" />
+        </mxCell>
+        <mxCell id="c_FundraiserTask" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FundraiserTask&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-targetAmount: double&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+execute(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="77" width="148" x="3095" y="1384.5" as="geometry" />
+        </mxCell>
+        <mxCell id="c_WorkshopTask" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;WorkshopTask&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-topic: String&lt;br/&gt;-materials: List&amp;lt;String&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+execute(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="88" width="156" x="3370" y="1542" as="geometry" />
+        </mxCell>
+        <mxCell id="c_OutreachTask" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OutreachTask&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-targetArea: String&lt;br/&gt;-communityGroup: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+execute(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="97" width="163" x="3490" y="1300.5" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerTaskFactory" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Factory»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;VolunteerTaskFactory&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+createTask(type: TaskType, title, start, end): VolunteerTask&lt;/p&gt;" vertex="1">
+          <mxGeometry height="93" width="367" x="3500" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerAssignment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;VolunteerAssignment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-assignmentId: int&lt;br/&gt;-volunteerId, taskId: int&lt;br/&gt;-role: String&lt;br/&gt;-status: AssignmentStatus&lt;br/&gt;-assignedById: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+accept() / decline()&lt;br/&gt;+complete() / cancel()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="155" width="168" x="3819" y="1355" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerCertificate" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;VolunteerCertificate&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-certificateId: int&lt;br/&gt;-type: CertificateType&lt;br/&gt;-totalHours: double&lt;br/&gt;-completedTasks: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+generate(): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="119" width="150" x="3610" y="2250" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerService" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Service»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;VolunteerService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-repository: VolunteerRepository&lt;br/&gt;-taskFactory: VolunteerTaskFactory&lt;br/&gt;-notifier: VolunteerNotifier&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+registerVolunteer(...) / updateVolunteer(...)&lt;br/&gt;+createTask(type, title, start, end): VolunteerTask&lt;br/&gt;+findSuitableVolunteers(taskId): List&amp;lt;Volunteer&amp;gt;&lt;br/&gt;+assignTask(volunteerId, taskId, role, by)&lt;br/&gt;+recordHours(...) / approveHours(...)&lt;br/&gt;+issueCertificate(volunteerId, type)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="197" width="307" x="3029" y="498" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerRepository" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface» «Repository»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;VolunteerRepository&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+save(v) / findById(id) / findAll()&lt;br/&gt;+saveTask(t) / findAllTasks()&lt;br/&gt;+saveAssignment(a) / saveHourRecord(r)&lt;br/&gt;+saveCertificate(c)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="260" x="3009" y="786" as="geometry" />
+        </mxCell>
+        <mxCell id="c_JsonVolunteerRepository" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;JsonVolunteerRepository&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-db: JsonRepository&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;(stores everything in the shared Database)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="84" width="268" x="3009" y="1246" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerNotifier" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;&lt;i&gt;VolunteerNotifier&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+notify(recipient: Volunteer, subject, message)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="93" width="293" x="3302" y="806" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ConsoleVolunteerNotifier" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ConsoleVolunteerNotifier&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+notify(recipient, subject, message)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="84" width="228" x="3334" y="1085" as="geometry" />
+        </mxCell>
+        <mxCell id="c_BeneficiaryService" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Service»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;BeneficiaryService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-repository: JsonRepository&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+register(...) / update(...) / deleteBeneficiary(id)&lt;br/&gt;+addNeeds(...) / requestResource(...) / requestService(...)&lt;br/&gt;+addResource(...) / restock(id, qty) / deleteResource(id)&lt;br/&gt;+distribute(...): ResourceDistribution&lt;br/&gt;+recordService(...) / recordImpact(...)&lt;br/&gt;+history(id) / impactSummary(id): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="169" width="355" x="2186" y="511" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Beneficiary" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Beneficiary&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id: int&lt;br/&gt;-name: String&lt;br/&gt;-contact: String&lt;br/&gt;-address: String&lt;br/&gt;-status: Status&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="123" width="106" x="2127" y="791" as="geometry" />
+        </mxCell>
+        <mxCell id="c_NeedAssessment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;NeedAssessment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id, beneficiaryId: int&lt;br/&gt;-resourceNeeds: String&lt;br/&gt;-serviceNeeds: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="97" width="149" x="2216" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="c_AssistanceRequest" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AssistanceRequest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id, beneficiaryId, resourceId: int&lt;br/&gt;-type: Type  (RESOURCE / SERVICE)&lt;br/&gt;-quantity, fulfilledQuantity: int&lt;br/&gt;-status: Status&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="221" x="2431" y="1009" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Resource" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Resource&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id: int&lt;br/&gt;-name: String&lt;br/&gt;-category: String&lt;br/&gt;-stock: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="112" x="2264" y="1351.5" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ResourceDistribution" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ResourceDistribution&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id, beneficiaryId, resourceId: int&lt;br/&gt;-quantity: int&lt;br/&gt;-requestId: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="97" width="206" x="2518" y="874" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ServiceRecord" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ServiceRecord&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id, beneficiaryId, requestId: int&lt;br/&gt;-serviceName: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="84" width="199" x="1810" y="994" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ImpactRecord" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ImpactRecord&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-id, beneficiaryId: int&lt;br/&gt;-outcome: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="84" width="136" x="2070" y="994" as="geometry" />
+        </mxCell>
+        <mxCell id="c_CrudMatrix" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«CRUD look-up table»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;CrudMatrix&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ENTITIES: String[]&lt;/u&gt;&lt;br/&gt;&lt;u&gt;-ROWS: List&amp;lt;Row&amp;gt;&lt;/u&gt;&lt;br/&gt;&lt;u&gt;+NOTES: String&lt;/u&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+rows(): List&amp;lt;Row&amp;gt;&lt;/u&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="131" x="2418" y="706" as="geometry" />
+        </mxCell>
+        <mxCell id="c_JsonRepository" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Singleton» «Subject»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;JsonRepository&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;-instance: JsonRepository&lt;/u&gt;&lt;br/&gt;-observers: List&amp;lt;DatabaseObserver&amp;gt;&lt;br/&gt;-filePath: Path&lt;br/&gt;-database: Database&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-JsonRepository(path)&lt;br/&gt;&lt;u&gt;+getInstance(): JsonRepository&lt;/u&gt;&lt;br/&gt;+read(op): T&lt;br/&gt;+update(op): T&lt;br/&gt;+registerObserver(o) / removeObserver(o)&lt;br/&gt;+notifyObservers()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="208" width="269" x="2349" y="1795" as="geometry" />
+        </mxCell>
+        <mxCell id="c_DatabaseObserver" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface» «Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;DatabaseObserver&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+databaseChanged(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="97" width="172" x="2160" y="2082" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Database" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Database&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+nextUserId, nextId, nextDonationId: int&lt;br/&gt;+donors, donations: Map&lt;br/&gt;+beneficiaries, needs, requests,&lt;br/&gt;  resources, distributions, ...: Map&lt;br/&gt;+volunteers, volunteerTasks,&lt;br/&gt;  volunteerAssignments, ...: Map&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="254" x="2406" y="2171" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventSubject" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface» «Subject»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;EventSubject&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+attach(o: EventObserver)&lt;br/&gt;+detach(o: EventObserver)&lt;br/&gt;+notifyObservers(change: String)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="129" width="213" x="5555" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventObserver" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface» «Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;EventObserver&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+update(event: Event, change: String)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="87" width="243" x="5593" y="1099" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Event" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Concrete Subject»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;Event&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-eventId: int&lt;br/&gt;-title: String&lt;br/&gt;-type: EventType  (FUNDRAISER / WORKSHOP / OUTREACH)&lt;br/&gt;-dateTime: LocalDateTime&lt;br/&gt;-location: String&lt;br/&gt;-capacity: int&lt;br/&gt;-status: EventStatus&lt;br/&gt;-observers: List&amp;lt;EventObserver&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+attach(o) / detach(o)&lt;br/&gt;+notifyObservers(change)&lt;br/&gt;+hasCapacity(): boolean&lt;br/&gt;+updateDetails(...)&lt;br/&gt;+cancel()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="256" width="366" x="5317" y="734" as="geometry" />
+        </mxCell>
+        <mxCell id="c_AttendeeNotifier" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Concrete Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;AttendeeNotifier&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+update(event, change)  (messages registered attendees)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="87" width="363" x="5197" y="1268" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerEventNotifier" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Concrete Observer»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;VolunteerEventNotifier&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+update(event, change)  (messages assigned volunteers)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="87" width="358" x="5593" y="1383" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventRegistration" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;EventRegistration&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-registrationId: int&lt;br/&gt;-eventId: int&lt;br/&gt;-userId: int&lt;br/&gt;-status: RegistrationStatus&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+confirm()&lt;br/&gt;+cancel()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="169" x="5528" y="2060" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventTicket" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;EventTicket&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-ticketCode: String&lt;br/&gt;-status: TicketStatus  (VALID / USED / VOID)&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+validate(): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="97" width="271" x="5344" y="2287" as="geometry" />
+        </mxCell>
+        <mxCell id="c_AttendanceRecord" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AttendanceRecord&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-attended: boolean&lt;br/&gt;-checkInTime: LocalDateTime&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+markPresent()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="97" width="190" x="5648" y="2287" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EventService" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Service»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;EventService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-repository: JsonRepository&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+createEvent(...) / updateEvent(...) / cancelEvent(id)&lt;br/&gt;+register(eventId, userId): EventRegistration&lt;br/&gt;+checkIn(ticketCode)&lt;br/&gt;+sendReminder(eventId)&lt;br/&gt;+attendanceReport(eventId): String&lt;/p&gt;" vertex="1">
+          <mxGeometry height="152" width="325" x="5197" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="c_NotificationService" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«Service» «Context»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;NotificationService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-repository: JsonRepository&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+send(to: User, subject, body)&lt;br/&gt;+sendToGroup(role, subject, body)&lt;br/&gt;-chooseChannel(to: User): ICommunicationChannel&lt;/p&gt;" vertex="1">
+          <mxGeometry height="119" width="319" x="4400" y="1589" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ICommunicationChannel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i style=&quot;font-size:10px&quot;&gt;«interface» «Strategy»&lt;/i&gt;&lt;br/&gt;&lt;b&gt;ICommunicationChannel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+deliver(message: Message): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="88" width="241" x="4255" y="1842" as="geometry" />
+        </mxCell>
+        <mxCell id="c_EmailChannel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;EmailChannel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+deliver(message): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="71" width="181" x="4538" y="2086" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SmsChannel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;SmsChannel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+deliver(message): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="71" width="181" x="4030" y="2086" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SocialMediaChannel" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;SocialMediaChannel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-platform: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+deliver(message): boolean  (public post)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="71" width="262" x="4244" y="2086" as="geometry" />
+        </mxCell>
+        <mxCell id="c_Message" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Message&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-messageId: int&lt;br/&gt;-recipientId: int&lt;br/&gt;-subject: String&lt;br/&gt;-body: String&lt;br/&gt;-channel: String&lt;br/&gt;-sentAt: LocalDateTime&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&amp;nbsp;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="136" width="152" x="4528" y="1814" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="c_DonationPanel" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DonationController" value="calls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="c_DonationPanel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DatabaseObserver" value="">
+          <mxGeometry relative="1" x="0.0833" as="geometry">
+            <Array as="points">
+              <mxPoint x="1825.5" y="65.2" />
+              <mxPoint x="2065.9" y="65.2" />
+              <mxPoint x="2065.9" y="2130.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="c_BeneficiaryPanel" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_BeneficiaryController" value="calls">
+          <mxGeometry relative="1" x="-0.1327" as="geometry">
+            <Array as="points">
+              <mxPoint x="2138.5" y="233.5" />
+              <mxPoint x="2227" y="233.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="c_BeneficiaryPanel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DatabaseObserver" value="">
+          <mxGeometry relative="1" x="0.3817" as="geometry">
+            <Array as="points">
+              <mxPoint x="2189" y="38.8" />
+              <mxPoint x="1681.8" y="38.8" />
+              <mxPoint x="1681.8" y="1201.8" />
+              <mxPoint x="2167.6" y="1201.8" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="c_VolunteerPanel" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerController" value="calls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="c_VolunteerPanel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DatabaseObserver" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2733.9" y="145.5" />
+              <mxPoint x="2733.9" y="2130.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="c_DonationController" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DonationService" value="delegates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="c_BeneficiaryController" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_BeneficiaryService" value="delegates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="c_VolunteerController" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerService" value="delegates">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2556.5" y="450.7" />
+              <mxPoint x="3182.5" y="450.7" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="c_VolunteerController" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerPanel" value="updates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="c_Main" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_JsonRepository" value="getInstance() / registerObserver()">
+          <mxGeometry relative="1" x="0.0108" as="geometry">
+            <Array as="points">
+              <mxPoint x="4955.5" y="1525.2" />
+              <mxPoint x="2509.5" y="1525.2" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="c_Main" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventCoordinator" value="creates admin">
+          <mxGeometry relative="1" x="0.0319" as="geometry">
+            <Array as="points">
+              <mxPoint x="5074" y="1646.5" />
+              <mxPoint x="5074" y="1896" />
+              <mxPoint x="5032.8" y="1896" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="c_EventCoordinator" style="endArrow=block;endFill=0;endSize=12;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_User" value="">
+          <mxGeometry relative="1" x="0.1945" as="geometry">
+            <Array as="points">
+              <mxPoint x="4979.5" y="2022" />
+              <mxPoint x="4925" y="2022" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="c_Volunteer" style="endArrow=block;endFill=0;endSize=12;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_User" value="">
+          <mxGeometry relative="1" x="0.0039" as="geometry">
+            <Array as="points">
+              <mxPoint x="3937.9" y="2101.5" />
+              <mxPoint x="3937.9" y="2209.1" />
+              <mxPoint x="4865.9" y="2209.1" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="c_JsonRepository" style="startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Database" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14_s" connectable="0" parent="e14" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14_t" connectable="0" parent="e14" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="c_JsonRepository" style="startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DatabaseObserver" value="observers">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2312.8" y="1899" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15_t" connectable="0" parent="e15" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="c_DonationService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_JsonRepository" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="c_BeneficiaryService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_JsonRepository" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="c_JsonVolunteerRepository" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_JsonRepository" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="c_Donor" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Donation" value="makes">
+          <mxGeometry relative="1" x="0.2388" as="geometry">
+            <Array as="points">
+              <mxPoint x="967.5" y="1284.5" />
+              <mxPoint x="1027" y="1284.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19_s" connectable="0" parent="e19" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.811" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19_t" connectable="0" parent="e19" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="c_Donation" style="startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20_t" connectable="0" parent="e20" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="c_CashPayment" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="c_CreditCardPayment" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="">
+          <mxGeometry relative="1" x="0.3348" as="geometry">
+            <Array as="points">
+              <mxPoint x="768.2" y="1765.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="c_DebitCardPayment" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="">
+          <mxGeometry relative="1" x="0.2235" as="geometry">
+            <Array as="points">
+              <mxPoint x="1072" y="1752" />
+              <mxPoint x="914.8" y="1752" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="c_CheckPayment" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="c_CheckPayment" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="c_PaymentDecorator" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="">
+          <mxGeometry relative="1" x="0.0707" as="geometry">
+            <Array as="points">
+              <mxPoint x="839.5" y="1989.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="c_PaymentDecorator" style="startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_IPaymentStrategy" value="wraps">
+          <mxGeometry relative="1" x="0.1333" as="geometry">
+            <Array as="points">
+              <mxPoint x="708.5" y="1822" />
+              <mxPoint x="815.8" y="1822" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e27_t" connectable="0" parent="e27" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="c_FeeCoveredPayment" style="endArrow=block;endFill=0;endSize=12;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_PaymentDecorator" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e29" edge="1" parent="1" source="c_DonationService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Donation" value="creates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="c_DonationService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Resource" value="adds donated stock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" edge="1" parent="1" source="c_BeneficiaryService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Beneficiary" value="manages">
+          <mxGeometry relative="1" x="-0.2173" as="geometry">
+            <Array as="points">
+              <mxPoint x="2320.7" y="704.5" />
+              <mxPoint x="2175" y="704.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e32" edge="1" parent="1" source="c_BeneficiaryService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="c_CrudMatrix" value="provides">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2578.1" y="595.5" />
+              <mxPoint x="2578.1" y="693" />
+              <mxPoint x="2483.5" y="693" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e33" edge="1" parent="1" source="c_Beneficiary" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_NeedAssessment" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e33_s" connectable="0" parent="e33" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e33_t" connectable="0" parent="e33" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e34" edge="1" parent="1" source="c_Beneficiary" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_AssistanceRequest" value="">
+          <mxGeometry relative="1" x="0.2113" as="geometry">
+            <Array as="points">
+              <mxPoint x="2464.6" y="882.3" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e34_s" connectable="0" parent="e34" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7935" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e34_t" connectable="0" parent="e34" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.8427" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35" edge="1" parent="1" source="c_Beneficiary" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_ResourceDistribution" value="receives">
+          <mxGeometry relative="1" x="0.2472" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2402" y="852.5" />
+              <mxPoint x="2402" y="907.4" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35_s" connectable="0" parent="e35" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8422" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35_t" connectable="0" parent="e35" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e36" edge="1" parent="1" source="c_Beneficiary" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_ServiceRecord" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e36_s" connectable="0" parent="e36" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e36_t" connectable="0" parent="e36" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e37" edge="1" parent="1" source="c_Beneficiary" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_ImpactRecord" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e37_s" connectable="0" parent="e37" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e37_t" connectable="0" parent="e37" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e38" edge="1" parent="1" source="c_ResourceDistribution" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Resource" value="of">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e38_s" connectable="0" parent="e38" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e38_t" connectable="0" parent="e38" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e39" edge="1" parent="1" source="c_AssistanceRequest" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Resource" value="for">
+          <mxGeometry relative="1" x="0.0824" as="geometry">
+            <Array as="points">
+              <mxPoint x="2541.5" y="1252.5" />
+              <mxPoint x="2440.8" y="1252.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e39_s" connectable="0" parent="e39" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-0.8368" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e39_t" connectable="0" parent="e39" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e40" edge="1" parent="1" source="c_Volunteer" style="startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Skill" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e40_s" connectable="0" parent="e40" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e40_t" connectable="0" parent="e40" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e41" edge="1" parent="1" source="c_Volunteer" style="startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_AvailabilitySlot" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e41_s" connectable="0" parent="e41" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e41_t" connectable="0" parent="e41" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e42" edge="1" parent="1" source="c_FundraiserTask" style="endArrow=block;endFill=0;endSize=12;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerTask" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e43" edge="1" parent="1" source="c_WorkshopTask" style="endArrow=block;endFill=0;endSize=12;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerTask" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e44" edge="1" parent="1" source="c_OutreachTask" style="endArrow=block;endFill=0;endSize=12;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerTask" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e45" edge="1" parent="1" source="c_VolunteerTaskFactory" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerTask" value="creates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e46" edge="1" parent="1" source="c_VolunteerService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerTaskFactory" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e47" edge="1" parent="1" source="c_VolunteerService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerRepository" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e48" edge="1" parent="1" source="c_VolunteerService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerNotifier" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e49" edge="1" parent="1" source="c_JsonVolunteerRepository" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e50" edge="1" parent="1" source="c_ConsoleVolunteerNotifier" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerNotifier" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e51" edge="1" parent="1" source="c_VolunteerHourRecord" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerAssignment" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e51_t" connectable="0" parent="e51" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e52" edge="1" parent="1" source="c_VolunteerTask" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerAssignment" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e52_s" connectable="0" parent="e52" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e52_t" connectable="0" parent="e52" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e53" edge="1" parent="1" source="c_VolunteerAssignment" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerHourRecord" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e53_s" connectable="0" parent="e53" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e53_t" connectable="0" parent="e53" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e54" edge="1" parent="1" source="c_Volunteer" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerCertificate" value="earns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e54_s" connectable="0" parent="e54" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e54_t" connectable="0" parent="e54" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e55" edge="1" parent="1" source="c_VolunteerHourRecord" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_User" value="approved by">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3842" y="1728.5" />
+              <mxPoint x="4889" y="1728.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e56" edge="1" parent="1" source="c_EventPanel" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventController" value="calls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e57" edge="1" parent="1" source="c_EventPanel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_DatabaseObserver" value="">
+          <mxGeometry relative="1" x="0.0932" as="geometry">
+            <Array as="points">
+              <mxPoint x="2815" y="17.7" />
+              <mxPoint x="1661.5" y="17.7" />
+              <mxPoint x="1661.5" y="2130.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e58" edge="1" parent="1" source="c_EventController" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventService" value="delegates">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2899.5" y="437.3" />
+              <mxPoint x="5359.5" y="437.3" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e59" edge="1" parent="1" source="c_EventService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Event" value="manages">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e60" edge="1" parent="1" source="c_EventService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_JsonRepository" value="uses">
+          <mxGeometry relative="1" x="-0.0007" as="geometry">
+            <Array as="points">
+              <mxPoint x="5324" y="485" />
+              <mxPoint x="2891" y="485" />
+              <mxPoint x="2891" y="1899" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e61" edge="1" parent="1" source="c_Event" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventSubject" value="">
+          <mxGeometry relative="1" x="-0.2648" as="geometry">
+            <Array as="points">
+              <mxPoint x="5549.7" y="697" />
+              <mxPoint x="5661.5" y="697" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e62" edge="1" parent="1" source="c_Event" style="startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventObserver" value="observers">
+          <mxGeometry relative="1" x="-0.2642" as="geometry">
+            <Array as="points">
+              <mxPoint x="5568" y="1044.5" />
+              <mxPoint x="5714.5" y="1044.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e62_t" connectable="0" parent="e62" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.8082" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e63" edge="1" parent="1" source="c_AttendeeNotifier" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventObserver" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e64" edge="1" parent="1" source="c_VolunteerEventNotifier" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventObserver" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5772" y="1284.5" />
+              <mxPoint x="5775" y="1284.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e65" edge="1" parent="1" source="c_AttendeeNotifier" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_NotificationService" value="uses">
+          <mxGeometry relative="1" x="0.0383" as="geometry">
+            <Array as="points">
+              <mxPoint x="4592.3" y="1311.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e66" edge="1" parent="1" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="c_NotificationService" value="uses">
+          <mxGeometry relative="1" x="0.0955" as="geometry">
+            <mxPoint x="5593" y="1451" as="sourcePoint" />
+            <mxPoint x="4559.5" y="1613.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e67" edge="1" parent="1" source="c_Event" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1.007;exitY=0.583;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry relative="1" x="-0.0638" as="geometry">
+            <Array as="points">
+              <mxPoint x="5982.1" y="883.2" />
+              <mxPoint x="5982.1" y="1525" />
+              <mxPoint x="5671.4" y="1525" />
+            </Array>
+            <mxPoint x="5522" y="990" as="sourcePoint" />
+            <mxPoint x="5671.4" y="2059.9999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e67_s" connectable="0" parent="e67" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.854" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e67_t" connectable="0" parent="e67" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.8969" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e68" edge="1" parent="1" source="c_User" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventRegistration" value="registers">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5612.5" y="1838.4" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e68_s" connectable="0" parent="e68" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e68_t" connectable="0" parent="e68" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.8583" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e69" edge="1" parent="1" source="c_EventRegistration" style="startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_EventTicket" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e69_s" connectable="0" parent="e69" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e69_t" connectable="0" parent="e69" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e70" edge="1" parent="1" source="c_EventRegistration" style="startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_AttendanceRecord" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e70_s" connectable="0" parent="e70" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e70_t" connectable="0" parent="e70" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e71" edge="1" parent="1" source="c_Event" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerTask" value="staffed by">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e71_s" connectable="0" parent="e71" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="0..1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e71_t" connectable="0" parent="e71" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e72" edge="1" parent="1" source="c_CommunicationPanel" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_CommunicationController" value="calls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e73" edge="1" parent="1" source="c_CommunicationController" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_NotificationService" value="delegates">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4559.5" y="378.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e74" edge="1" parent="1" source="c_NotificationService" style="startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_ICommunicationChannel" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e74_t" connectable="0" parent="e74" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e75" edge="1" parent="1" source="c_EmailChannel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="c_ICommunicationChannel" value="">
+          <mxGeometry relative="1" x="0.3398" as="geometry">
+            <Array as="points">
+              <mxPoint x="4628.5" y="2039.5" />
+              <mxPoint x="4451.6" y="2039.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e76" edge="1" parent="1" source="c_SmsChannel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_ICommunicationChannel" value="">
+          <mxGeometry relative="1" x="0.1681" as="geometry">
+            <Array as="points">
+              <mxPoint x="4120.5" y="2043.1" />
+              <mxPoint x="4317.2" y="2043.1" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e77" edge="1" parent="1" source="c_SocialMediaChannel" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_ICommunicationChannel" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e78" edge="1" parent="1" source="c_NotificationService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_Message" value="saves">
+          <mxGeometry relative="1" x="-0.1492" as="geometry">
+            <Array as="points">
+              <mxPoint x="4578.6" y="1761" />
+              <mxPoint x="4604" y="1761" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e79" edge="1" parent="1" source="c_NotificationService" style="endArrow=open;endSize=10;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_JsonRepository" value="uses">
+          <mxGeometry relative="1" x="0.0095" as="geometry">
+            <Array as="points">
+              <mxPoint x="4500.2" y="1744.4" />
+              <mxPoint x="2557" y="1744.4" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hkhkIm3-FiiR1XSNQSpu-1" edge="1" parent="1" source="c_InKindPayment" style="endArrow=block;endFill=0;endSize=12;dashed=1;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_CheckPayment" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1381" y="1894" as="sourcePoint" />
+            <mxPoint x="861" y="1708" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_CheckPayment" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CheckPayment&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-checkNumber: String&lt;br/&gt;-bankName: String&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ProcessPayment(amount): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="93" width="231" x="1069" y="1916" as="geometry" />
+        </mxCell>
+        <mxCell id="hkhkIm3-FiiR1XSNQSpu-2" edge="1" parent="1" source="c_Volunteer" style="endArrow=none;html=1;rounded=0;fontSize=10;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;" target="c_VolunteerHourRecord" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3757" y="2034" as="sourcePoint" />
+            <mxPoint x="3903" y="1510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hkhkIm3-FiiR1XSNQSpu-3" connectable="0" parent="hkhkIm3-FiiR1XSNQSpu-2" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_VolunteerHourRecord" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fontSize=12;fillColor=#FFFFFF;strokeColor=#333333;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;VolunteerHourRecord&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-recordId: int&lt;br/&gt;-assignmentId: int&lt;br/&gt;-date: LocalDate&lt;br/&gt;-hours: double&lt;br/&gt;-approvalStatus: ApprovalStatus&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+approve(approver: User)&lt;br/&gt;+reject(approver: User)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="146" width="204" x="3740" y="1560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
