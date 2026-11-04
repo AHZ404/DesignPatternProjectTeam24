@@ -26,7 +26,7 @@ A Java Swing desktop application designed for non-profit organizations to manage
 | **Repository** | Volunteer | `VolunteerRepository` (interface), `JsonVolunteerRepository` (implementation over `JsonRepository`) | Volunteer business logic does not depend on how data is stored. |
 | **MVC** | Donation, Beneficiary, Volunteer | `model/` classes, `view/*Panel`, `controller/*Controller`, `service/*Service` | Views only call controllers; controllers delegate to services; services read/write the database. |
 
-> The `eventmanagement` package also contains a console-only Observer example (`Subject`, `EventObservable`, `EventObserver`, `NotificationObserver`, `EventView`), run separately with `java -cp "out:libs/*" eventmanagement.Main`. The GUI uses the database Observer described above.
+> The full class diagram of the project is in `UML.drawio` (editable in draw.io) and `UML Image.png`.
 
 ---
 
@@ -107,7 +107,6 @@ src/
 │   │   └── VolunteerNotifier.java, ConsoleVolunteerNotifier.java
 │   └── view/
 │       └── VolunteerPanel.java            # Observer; admin view or a single volunteer's view
-├── eventmanagement/            # Separate console demo of events (Observer example), not part of the GUI
 ├── user/model/                 # User base class & EventCoordinator (used as the admin/coordinator user)
 └── Main.java                   # Entry point: login screen, one window per user type, Observer wiring
 ```
@@ -186,11 +185,6 @@ If using **Maven** (`pom.xml`), ensure `jackson-databind` is included:
 2. **Console Strategy Demo Mode:** runs the payment strategy demonstration in the terminal without launching the Swing GUI.
    ```bash
    java -cp "out:libs/*" Main --donation-demo
-   ```
-
-3. **Event Management Console Demo:** the separate Observer example for events.
-   ```bash
-   java -cp "out:libs/*" eventmanagement.Main
    ```
 
 ---
